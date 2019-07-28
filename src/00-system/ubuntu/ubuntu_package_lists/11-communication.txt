@@ -1,0 +1,5 @@
+bitlbee-dev
+bitlbee-libpurple
+libglib2.0-dev
+libjson-glib-dev
+libpurple-dev

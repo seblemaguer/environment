@@ -1,0 +1,26 @@
+# MAC
+.DS_Store
+
+# binary event and local as we don't care !
+local
+archives
+auto
+
+# Temporary download
+*.tar.gz
+src/emacs/
+src/mu/mu
+
+# Emacs part
+*.el
+*.elc
+*.html
+
+# ipython
+src/configuration/ipython
+
+# log
+install.log
+
+# ignore htoprc
+htoprc

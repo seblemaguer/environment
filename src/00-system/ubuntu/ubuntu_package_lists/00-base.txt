@@ -1,0 +1,16 @@
+apt-file
+autoconf
+automake
+build-essential
+caffeine
+cmake
+curl
+g++
+gcc
+git
+htop
+libclang-dev
+libclang1
+libtool
+mercurial
+vim

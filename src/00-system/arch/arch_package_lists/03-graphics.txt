@@ -1,0 +1,17 @@
+arandr
+awesome
+eog
+evince
+gtk3-print-backends
+jq
+lightdm
+lightdm-gtk-greeter
+python-requests
+solaar
+unclutter
+xtrlock
+xorg-font-util
+xorg-font-utils
+xorg-xinit
+xorg-server
+xorg-xauth

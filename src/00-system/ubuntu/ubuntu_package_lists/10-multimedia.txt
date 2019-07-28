@@ -1,0 +1,23 @@
+abcde
+cuetools
+ffmpeg
+gimp
+gimp-help-fr
+imagemagick
+inkscape (SLM: simple vectorize picture design tool)
+librsvg2-dev
+mjpegtools
+mkcue
+mpv
+pdftk
+praat
+recode
+shnsplit
+shntool
+timidity
+transfig
+uml-utilities
+vlc
+vorbis-tools
+wavesurfer (SLM: tool to visualize and manipulate sound signal, spectrum ...)
+xvid4conf

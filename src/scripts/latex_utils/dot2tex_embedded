@@ -1,0 +1,50 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import sys
+import os
+import string
+from subprocess import call
+
+# Basename for the whole process
+base_fn = "/tmp/tmp%d" % os.getpid()
+
+
+# Read the temp dot2tex content
+dot2tex_fh = open(sys.argv[2], "r")
+dot2tex_content = dot2tex_fh.readlines()
+dot2tex_content = string.join(dot2tex_content, '')
+dot2tex_fh.close()
+
+
+# Generate an appropriate tex file
+tex_content = """
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage[active,pdftex,tightpage]{preview}
+\PreviewEnvironment[]{tikzpicture}
+\PreviewEnvironment[]{pgfpicture}
+
+\usepackage{dot2texi}
+\usetikzlibrary{shapes,arrows}
+\\begin{document}
+\\begin{dot2tex}[%s]
+   %s
+\end{dot2tex}
+\end{document}
+""" % (sys.argv[1], dot2tex_content)
+
+tmp_fn = base_fn + ".tex"
+tex_fh = open(tmp_fn, "w")
+tex_fh.write(tex_content)
+tex_fh.close()
+
+# Compile and move result to the right dirr
+os.chdir("/tmp")
+call(["pdflatex", "-shell-escape", "-output-directory", "/tmp", tmp_fn])
+call(["mv", base_fn+".pdf", sys.argv[3]])
+
+
+# Clean
+call(["rm", "-rf", base_fn + ".log", base_fn + ".aux", base_fn + "-dot2tex-fig1.dot", base_fn + "-dot2tex-fig1.tex"])

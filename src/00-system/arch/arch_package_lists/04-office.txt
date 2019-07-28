@@ -1,0 +1,14 @@
+blueman
+dropbox
+firefox
+latex2html
+ledger
+libreoffice
+msmtp
+npm
+parcellite
+# pdf2tex
+scribus
+simple-mtpfs
+texinfo
+texlive-most

@@ -1,0 +1,53 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import sys
+import os
+import string
+from subprocess import call
+
+# Basename for the whole process
+base_fn = "/tmp/tmp%d" % os.getpid()
+
+
+# 
+pgf_fh = open(sys.argv[2], "r")
+pgf_content = pgf_fh.readlines()
+pgf_content = string.join(pgf_content, '')
+pgf_fh.close()
+
+
+#
+if sys.argv[1] == "nil":
+    tikz_options = ""
+else:
+    tikz_options = sys.argv[1]
+tex_content = """
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage[active,pdftex,tightpage]{preview}
+\PreviewEnvironment[]{tikzpicture}
+\PreviewEnvironment[]{pgfpicture}
+
+\usetikzlibrary{shapes,arrows}
+\\begin{document}
+\\begin{tikzpicture}[%s]
+   %s
+\end{tikzpicture}
+\end{document}
+""" % (tikz_options, pgf_content)
+
+# Tmp filename
+tmp_fn = "/tmp/tmp%d.tex" % os.getpid()
+tex_fh = open(tmp_fn, "w")
+tex_fh.write(tex_content)
+tex_fh.close()
+
+# Compiler
+os.chdir("/tmp")
+call(["pdflatex", "-shell-escape", "-output-directory", "/tmp", tmp_fn])
+call(["mv", base_fn+".pdf", sys.argv[3]])
+
+# Clean
+call(["rm", "-rf", base_fn + ".log", base_fn + ".aux"])
