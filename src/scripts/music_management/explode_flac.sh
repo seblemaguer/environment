@@ -92,8 +92,9 @@ export_cover() {
 files=("${(@f)$(ls -1 **/*.flac)}")
 for f in $files
 do
+    echo "===== $f ====="
     # First some rename just to be sure
-    perlrename 's/.flac.cue/.cue/g' $f
+    perl-rename 's/.flac.cue/.cue/g' $f.cue
 
     split2flac "$f" -o $OUT
 
