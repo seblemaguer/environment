@@ -46,6 +46,8 @@ ln -s $PWD/cvs/prune_history.sh $PREFIX/bin/prune_history
 ln -s $PWD/latex_utils/compilePGF.py $PREFIX/bin/compilePGF
 
 # Mailing
-ln -s $PWD/system/syncmail.sh $PREFIX/bin/syncmail
 ln -s $PWD/system/sendmail.sh $PREFIX/bin/sendmail
 ln -s $PWD/system/stamp_mails.sh $PREFIX/bin/stamp_mails
+ln -s $PWD/system/syncmail.sh $PREFIX/bin/syncmail
+ln -s $PWD/system/emacs.sh $PREFIX/bin/emacs
+
