@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# Default values
+# Set environment path to the current directory
 NB_PROC=1
 
 # Dealing with options
@@ -24,26 +24,25 @@ while getopts ":j:hs" opt; do
 done
 shift $OPTIND-1
 
+# Dealing with arguments
 if [ $# -lt 1 ]
 then
     echo "$0 [-s] [-j <nb_proc>] <prefix>"
     exit -1
 fi
-
 PREFIX=$1
 
-if [ "$SERVER_MODE_ON" != true ]
-then
 
-    # Activate conda (FIXME: should not be needed)
-    source $HOME/environment/local/miniconda3/etc/profile.d/conda.sh
-
-    (
-        eval "$(conda shell.bash hook)"
-        conda activate tools
-        git clone git@github.com:seblemaguer/inkscapeslide.git
-        cd inkscapeslide
-        pip install -e .
-        rm -rfv inkscapeslide
-    )
-fi
+# Installing different part
+for src_dir in `ls -d * | grep -v install.sh`
+do
+    echo "=============================================================================="
+    echo "### Installating from $src_dir"
+    echo "=============================================================================="
+    if [ "$SERVER_MODE_ON" = true ]
+    then
+        (cd "$src_dir"; zsh "install.sh" -s -j "$NB_PROC" $PREFIX)
+    else
+        (cd "$src_dir"; zsh "install.sh"    -j "$NB_PROC" $PREFIX)
+    fi
+done

@@ -45,16 +45,13 @@ git pull
 # Installing different part
 for src_dir in `ls -d src/*`
 do
-    if [ "$src_dir" != "src/non-install-utils" ]
+    echo "=============================================================================="
+    echo "### Installating from $src_dir"
+    echo "=============================================================================="
+    if [ "$SERVER_MODE_ON" = true ]
     then
-        echo "=============================================================================="
-        echo "### Installating from $src_dir"
-        echo "=============================================================================="
-        if [ "$SERVER_MODE_ON" = true ]
-        then
-            (cd "$src_dir"; zsh "install.sh" -s -j "$NB_PROC" "$ENV_PATH/local")
-        else
-            (cd "$src_dir"; zsh "install.sh"    -j "$NB_PROC" "$ENV_PATH/local")
-        fi
+        (cd "$src_dir"; zsh "install.sh" -s -j "$NB_PROC" "$ENV_PATH/local")
+    else
+        (cd "$src_dir"; zsh "install.sh"    -j "$NB_PROC" "$ENV_PATH/local")
     fi
 done

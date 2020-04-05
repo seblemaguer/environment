@@ -37,6 +37,9 @@ echo "==== Get conda"
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
 zsh /tmp/miniconda.sh -q -b -p $PREFIX/miniconda3
 
+# Activate conda (FIXME: should not be needed!)
+source $HOME/environment/local/miniconda3/etc/profile.d/conda.sh
+
 # Update conda
 echo "==== Update conda"
 conda update -q -y -n base -c defaults conda
