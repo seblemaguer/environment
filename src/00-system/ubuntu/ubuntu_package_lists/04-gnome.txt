@@ -1,3 +1,0 @@
-libgpaste4-dev
-gpaste
-nautilus-dropbox
