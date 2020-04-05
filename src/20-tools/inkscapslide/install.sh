@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# Default values
+NB_PROC=1
+
 # Dealing with options
 while getopts ":j:hs" opt; do
     case $opt in
@@ -31,8 +34,12 @@ PREFIX=$1
 
 if [ "$SERVER_MODE_ON" != true ]
 then
-    # Install needed packages
-    (cd getmanga;
-    python3 ./setup.py install --user
+    (
+        eval "$(conda shell.bash hook)"
+        conda activate tools
+        git clone git@github.com:seblemaguer/inkscapeslide.git
+        cd inkscapeslide
+        pip install -e .
+        rm -rfv inkscapeslide
     )
 fi
