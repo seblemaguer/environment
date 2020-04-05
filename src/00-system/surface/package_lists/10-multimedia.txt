@@ -1,0 +1,16 @@
+abcde
+cuetools
+ffmpeg
+gimp
+imagemagick
+inkscape (SLM: simple vectorize picture design tool)
+librsvg2-dev
+mjpegtools
+mkcue
+mpv
+pdftk
+praat
+qcomicbook
+recode
+shnsplit
+shntool
