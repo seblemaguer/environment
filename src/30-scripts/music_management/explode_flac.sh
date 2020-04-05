@@ -46,6 +46,9 @@ update_pattern () {
 export_cover() {
 
     CUE=$(echo "$1" | sed 's/\.flac/.cue/g')
+    cat $CUE > CUE_TMP.cue
+    echo "" >> CUE_TMP.cue
+    CUE=CUE_TMP.cue
 
     # get common tags
     TAG_ARTIST=$(${GETTAG} %P "${CUE}" 2>/dev/null)
@@ -85,6 +88,10 @@ export_cover() {
     metaflac --export-picture-to=cover.jpg "$1"
     convert -resize 60x60 "cover.jpg" "$OUT/$PATTERN/cover_small.jpg"
     convert -resize 120x120 "cover.jpg" "$OUT/$PATTERN/cover_med.jpg"
+
+    # Cleaning
+    rm -rfv cover.jpg
+    rm $CUE
 }
 
 #############################################################################################################################
@@ -93,8 +100,9 @@ files=("${(@f)$(ls -1 **/*.flac)}")
 for f in $files
 do
     echo "===== $f ====="
+
     # First some rename just to be sure
-    perl-rename 's/.flac.cue/.cue/g' $f.cue
+    perlrename 's/.flac.cue/.cue/g' $f.cue
 
     split2flac "$f" -o $OUT
 

@@ -41,6 +41,7 @@ def main():
 
     # Get output directory
     pgf_filename = os.path.abspath(args.pgf_filename)
+    parent_directory = os.path.abspath(os.path.join(pgf_filename, os.pardir))
     output_directory = os.path.dirname(pgf_filename)
     if args.output_directory is not None:
         output_directory = args.output_directory
@@ -52,14 +53,15 @@ def main():
 
     tex_content = """%s
     \\usepackage[utf8]{inputenc}
+    \\graphicspath{{%s/}}
     \\begin{document}
     \\input{%s}
     \\end{document};
-    """ % (header, pgf_filename)
+    """ % (header, parent_directory, pgf_filename)
 
     # Create temporary part
     temp_dir = tempfile.mkdtemp()
-
+    
     # Tmp filename
     basename = os.path.basename(pgf_filename)
     basename = os.path.splitext(basename)[0]

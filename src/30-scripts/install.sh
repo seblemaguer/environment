@@ -51,3 +51,5 @@ ln -s $PWD/system/stamp_mails.sh $PREFIX/bin/stamp_mails
 ln -s $PWD/system/syncmail.sh $PREFIX/bin/syncmail
 ln -s $PWD/system/emacs.sh $PREFIX/bin/emacs
 
+# Helper
+ln -s $PWD/system/rename.pl $PREFIX/bin/rename
