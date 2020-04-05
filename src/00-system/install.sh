@@ -53,5 +53,3 @@ then
             ;;
     esac
 fi
-
-(cd $PWD/specific; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)

@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# Default values
+NB_PROC=1
+
 # Dealing with options
 while getopts ":j:hs" opt; do
     case $opt in
@@ -29,20 +32,20 @@ fi
 
 PREFIX=$1
 
-
 if [ "$SERVER_MODE_ON" != true ]
 then
-    ECLIPSE_NAME=eclipse-android-neon-R-incubation-linux-gtk-x86_64.tar.gz
 
-    # Download and extract eclipse
-    wget http://artfiles.org/eclipse.org//technology/epp/downloads/release/neon/R/$ECLIPSE_NAME
-    tar xvzf $ECLIPSE_NAME
+    #FIXME: only ubuntu support for now
+    if [ ! -e /usr/bin/node ]
+    then
+        sudo ln -s /usr/bin/nodejs /usr/bin/node
+    fi
 
-    # "Install"
-    mkdir -p $PREFIX/share
-    mv eclipse $PREFIX/share
-    ln -s $PREFIX/share/eclipse/eclipse $PREFIX/bin
+    # install imapnotify
+    npm install -g imapnotify
 
-    # Cleaning
-    rm -rfv $ECLIPSE_NAME
+    # Fix postcommand
+    patch --follow-symlinks $PREFIX/npm_packages/lib/node_modules/imapnotify/bin/imapnotify < fix_imapnotify.patch
+    
+    ln -sf $PREFIX/npm_packages/lib/node_modules/imapnotify/bin/imapnotify $PREFIX/bin/imapnotify
 fi

@@ -1,0 +1,4 @@
+243c243
+< 		, formattedPostCommand = printf(postCommandIsEventMap ? postCommand[event] || '': command, formattedBox)
+---
+> 		, formattedPostCommand = printf(postCommandIsEventMap ? postCommand[event] || '': postCommand, formattedBox)
