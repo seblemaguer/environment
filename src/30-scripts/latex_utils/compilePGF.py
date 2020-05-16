@@ -3,13 +3,15 @@
 """
 AUTHOR
 
-     <slemaguer@coli.uni-saarland.de>
+     Sébastien Le Maguer <lemagues@tcd.ie>
 
 DESCRIPTION
 
+    Utility scripts to compile a PGF/TikZ file in a standalone
+
 LICENSE
     This script is in the public domain, free from copyrights or restrictions.
-    Created: 31 December 2017
+    Created: 08 May 2020
 """
 
 import sys
@@ -48,11 +50,16 @@ def main():
 
     # Generate the content
     header = "\\documentclass[crop,tikz,convert={outext=.svg,command=\\unexpanded{pdf2svg \\infile\\space\\outfile}},multi=false]{standalone}[2012/04/13]"
-    if args.only_pdf:
+    if args.with_svg:
         header = "\\documentclass[crop,tikz,multi=false]{standalone}[2012/04/13]"
 
     tex_content = """%s
     \\usepackage[utf8]{inputenc}
+    \\usepackage{pgfplots}
+    \\DeclareUnicodeCharacter{2212}{−}
+    \\usepgfplotslibrary{groupplots,dateplot}
+    \\usetikzlibrary{patterns,shapes.arrows}
+    \\pgfplotsset{compat=newest}
     \\graphicspath{{%s/}}
     \\begin{document}
     \\input{%s}
@@ -61,7 +68,15 @@ def main():
 
     # Create temporary part
     temp_dir = tempfile.mkdtemp()
-    
+
+    # Copy png file (FIXME: tikzplotlib necessity)
+    import glob, shutil
+
+    files = glob.iglob(os.path.join(parent_directory, "*.png"))
+    for file in files:
+        if os.path.isfile(file):
+            shutil.copy2(file, temp_dir)
+
     # Tmp filename
     basename = os.path.basename(pgf_filename)
     basename = os.path.splitext(basename)[0]
@@ -72,12 +87,12 @@ def main():
         tex_fh.write(tex_content)
 
     # Compile
-    # print(["pdflatex", "-shell-escape", tmp_fn])
     call(["pdflatex", "-shell-escape", "%s.tex" % basename], cwd=temp_dir)
 
     # Copy
     shutil.copyfile("%s/%s.pdf" % (temp_dir, basename), "%s/%s.pdf" % (output_directory, basename))
-    shutil.copyfile("%s/%s.svg" % (temp_dir, basename), "%s/%s.svg" % (output_directory, basename))
+    if args.with_svg:
+        shutil.copyfile("%s/%s.svg" % (temp_dir, basename), "%s/%s.svg" % (output_directory, basename))
 
     # Delete temps files
     shutil.rmtree(temp_dir)
@@ -92,8 +107,8 @@ if __name__ == '__main__':
         # Add options
         parser.add_argument("-v", "--verbosity", action="count", default=0,
                             help="increase output verbosity")
-        parser.add_argument("-p", "--only-pdf", action="store_true",
-                            help="doesn't generate the SVG")
+        parser.add_argument("-p", "--with-svg", action="store_true",
+                            help="Produce the SVG as well")
         parser.add_argument("-o", "--output_directory", default=None,
                             help="output directory")
 
