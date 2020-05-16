@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+NB_PROC=1
+
 # Dealing with options
 while getopts ":j:hs" opt; do
     case $opt in
@@ -31,32 +33,6 @@ PREFIX=$1
 
 if [ "$SERVER_MODE_ON" != true ]
 then
-    case `python -mplatform | sed 's/.*-with-//g'` in
-        Ubuntu)
-            (
-                # Preparing
-                git clone git://github.com/EionRobb/skype4pidgin.git
-                cd skype4pidgin/skypeweb
-                mkdir build
-                cd build
-
-                # Compiling and packing
-                cmake ..
-                cpack
-
-                # Install
-                sudo apt install -y `ls *.deb`
-
-                # Cleaning
-                cd ../../..
-                rm -rfv skype4pidgin
-            )
-            ;;
-        arch)
-            sudo trizen -Syu purple-skypeweb
-            ;;
-        *)
-            exit -1
-            ;;
-    esac
+    (cd purple-hangout; zsh install.sh -j $NB_PROC $PREFIX)
+    (cd skypeweb; zsh install.sh -j $NB_PROC $PREFIX)
 fi
