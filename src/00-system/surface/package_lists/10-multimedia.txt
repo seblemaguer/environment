@@ -12,5 +12,4 @@ pdftk
 praat
 qcomicbook
 recode
-shnsplit
 shntool

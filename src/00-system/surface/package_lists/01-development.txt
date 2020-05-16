@@ -17,7 +17,6 @@ ipython3
 kcachegrind
 libtool
 perl
-python-pyudev
 python3
 python3-setuptools
 sox

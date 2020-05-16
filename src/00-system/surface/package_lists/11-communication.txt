@@ -1,5 +1,5 @@
 bitlbee-facebook
-bitlbee-purple
+bitlbee-libpurple
 cmake
 libglib2.0-dev
 libjson-glib-dev
