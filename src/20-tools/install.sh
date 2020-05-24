@@ -41,8 +41,8 @@ do
     echo "=============================================================================="
     if [ "$SERVER_MODE_ON" = true ]
     then
-        (cd "$src_dir"; zsh "install.sh" -s -j "$NB_PROC" "$ENV_PATH/local")
+        (cd "$src_dir"; zsh "install.sh" -s -j "$NB_PROC" "$PREFIX")
     else
-        (cd "$src_dir"; zsh "install.sh"    -j "$NB_PROC" "$ENV_PATH/local")
+        (cd "$src_dir"; zsh "install.sh"    -j "$NB_PROC" "$PREFIX")
     fi
 done

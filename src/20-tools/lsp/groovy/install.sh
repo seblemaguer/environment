@@ -2,6 +2,7 @@
 
 # Default values
 NB_PROC=1
+SERVER_MODE_ON=false
 
 # Dealing with options
 while getopts ":j:hs" opt; do
@@ -39,7 +40,7 @@ then
         cd groovy-language-server
         ./gradlew build
         mkdir -p $PREFIX/lib/
-        cp -rfv build/libs/groovy-language-server.jar $PREFIX/lib
+        cp -rfv build/libs/groovy-language-server-all.jar $PREFIX/lib
         cd ../
         rm -rfv groovy-language-server
     )

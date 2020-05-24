@@ -2,6 +2,7 @@
 
 # Set environment path to the current directory
 NB_PROC=1
+SERVER_MODE_ON=false
 
 # Dealing with options
 while getopts ":j:hs" opt; do
@@ -38,8 +39,8 @@ for src_dir in `ls -d * | grep -v install.sh`
 do
     if [ "$SERVER_MODE_ON" = true ]
     then
-        (cd "$src_dir"; zsh "install.sh" -s -j "$NB_PROC" "$ENV_PATH/local")
+        (cd "$src_dir"; zsh "install.sh" -s -j "$NB_PROC" "$PREFIX")
     else
-        (cd "$src_dir"; zsh "install.sh"    -j "$NB_PROC" "$ENV_PATH/local")
+        (cd "$src_dir"; zsh "install.sh"    -j "$NB_PROC" "$PREFIX")
     fi
 done
