@@ -38,12 +38,12 @@ fi
 
 if [ "$SERVER_MODE_ON" != true ]
 then
-    case `python -mplatform | sed 's/.*-with-//g'` in
+    case `hostname` in
         Darwin)
             zsh $PWD/mac/install.sh $OPT_SERVER -j $NB_PROC $PREFIX
             ;;
-        Ubuntu)
-            zsh $PWD/ubuntu/install.sh $OPT_SERVER -j $NB_PROC $PREFIX
+        lemagues-surface)
+            (cd $PWD/surface; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
             ;;
         arch)
             (cd $PWD/arch; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
