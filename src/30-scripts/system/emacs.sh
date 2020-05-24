@@ -8,7 +8,7 @@ case `uname` in
         EMACS_CLIENT_CMD=$EMACS_DIR/bin/emacsclient
         ;;
     *)
-        EMACS_DIR=/usr/bin
+        EMACS_DIR=~/environment/local/emacs/bin/
         EMACS_CMD=$EMACS_DIR/emacs
         EMACS_CLIENT_CMD=$EMACS_DIR/emacsclient
         ;;;
