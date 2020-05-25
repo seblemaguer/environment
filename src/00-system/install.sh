@@ -39,14 +39,11 @@ fi
 if [ "$SERVER_MODE_ON" != true ]
 then
     case `hostname` in
-        Darwin)
-            zsh $PWD/mac/install.sh $OPT_SERVER -j $NB_PROC $PREFIX
-            ;;
         lemagues-surface)
             (cd $PWD/surface; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
             ;;
-        arch)
-            (cd $PWD/arch; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
+        stb067)
+            (cd $PWD/stb067; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
             ;;
         *)
             exit -1

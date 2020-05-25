@@ -1,10 +1,6 @@
-aspell-de
-aspell-en
-aspell-fr
 bibtex2html
 cantarell-fonts
 ditaa
-emacs
 fontconfig
 glibc
 gnutls

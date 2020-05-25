@@ -1,5 +1,4 @@
 acpi
-apache
 autoconf
 autoconf-archive
 automake
@@ -24,7 +23,6 @@ mlocate
 openssh
 patch
 pkg-config
-python-pip
 rsync
 seahorse
 vim

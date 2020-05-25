@@ -8,6 +8,7 @@ lightdm
 lightdm-gtk-greeter
 python-requests
 solaar
+ttf-meslo-nerd-font-powerlevel10k
 unclutter
 xtrlock
 xorg-font-util
