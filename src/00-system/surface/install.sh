@@ -31,7 +31,7 @@ PREFIX=$1
 
 
 # Some activation
-sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+sudo add-apt-repository --yes "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
 
 # Add surface repository
 echo "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main" | sudo tee /etc/apt/sources.list.d/linux-surface.list
