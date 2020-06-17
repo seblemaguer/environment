@@ -1,4 +1,0 @@
-bitlbee-facebook
-bitlbee-libpurple
-libpurple
-skypeforlinux-stable-bin

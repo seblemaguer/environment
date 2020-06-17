@@ -29,37 +29,24 @@ fi
 
 PREFIX=$1
 
-# Pacaur bootstrap
-curl https://gist.githubusercontent.com/seblemaguer/ffcb5462e14a2ccbb59b53cc283518c0/raw/c7ab0a994f38505387094c6e3a0c3c7667fdc224/install-trizen.sh > install-trizen.sh
-sh install-trizen.sh
-rm -rfv install-trizen.sh
 
-# Update system
-trizen -Syu --aur
+# Some activation
+sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+
+# Add bitlbee repository
+echo "deb http://download.opensuse.org/repositories/home:/jgeboski/xUbuntu_19.10 ./"  | sudo tee /etc/apt/sources.list.d/bitlbee.list
+
+# Add qarte repository
+wget -O- 'https://build.opensuse.org/projects/home:jgeboski/public_key' | sudo apt-key add -
+sudo add-apt-repository ppa:vincent-vandevyvre/vvv
+
+# Update the system
+sudo apt-get update
+sudo apt-get -q -y dist-upgrade
 
 # Package installation
-for l in `ls -1 arch_package_lists/*`
+for l in `ls -1 package_lists/*`
 do
     printf "########################### %-60s ##########################\n" $l
-    trizen --needed --noconfirm -S `sed 's/[ ]*(.*//g' $l | grep -v "^#" | tr '\n' ' '` # TODO: delete empty lines
+    sudo apt-get -y --fix-missing install `sed 's/[ ]*(.*//g' $l | tr '\n' ' '` # TODO: delete empty lines
 done
-
-# Change locale for X-server
-sudo localectl set-x11-keymap fr
-
-# Define some configurations
-sudo cp -f global_conf/lightdm.conf /etc/lightdm/
-sudo cp -f global_conf/51-blueman.rules /etc/polkit-1/rules.d/
-
-# User
-username=`whoami`
-sudo usermod -a -G wheel $username
-sudo usermod -a -G docker $username
-
-# Enable some service
-sudo systemctl enable lightdm.service
-sudo systemctl enable bluetooth
-sudo systemctl enable bitlbee
-sudo systemctl enable org.cups.cupsd.service
-sudo systemctl enable postfix
-sudo systemctl enable docker.service
