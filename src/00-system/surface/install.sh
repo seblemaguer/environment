@@ -36,13 +36,15 @@ sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) pa
 # Add surface repository
 echo "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main" | sudo tee /etc/apt/sources.list.d/linux-surface.list
 
+# Add xournalpp repository
+sudo add-apt-repository --yes ppa:andreasbutti/xournalpp-master
+
 # Add bitlbee repository
-echo "deb http://download.opensuse.org/repositories/home:/jgeboski/xUbuntu_19.10 ./"  | sudo tee /etc/apt/sources.list.d/bitlbee.list
+sudo add-apt-repository --yes "deb http://download.opensuse.org/repositories/home:/jgeboski/xUbuntu_$(lsb_release -sr) ./"
 
 # Add qarte repository
 wget -O- 'https://build.opensuse.org/projects/home:jgeboski/public_key' | sudo apt-key add -
-
-sudo add-apt-repository ppa:vincent-vandevyvre/vvv
+sudo add-apt-repository --yes ppa:vincent-vandevyvre/vvv
 
 # Update the system
 sudo apt-get update

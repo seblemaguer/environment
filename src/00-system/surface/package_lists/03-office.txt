@@ -8,3 +8,4 @@ texinfo
 texlive-full
 tipa
 xfonts-tipa
+xournalpp
