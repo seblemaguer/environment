@@ -6,21 +6,6 @@ local
 archives
 auto
 
-# Temporary download
-*.tar.gz
-src/emacs/
-src/mu/mu
-
-# Emacs part
-*.el
-*.elc
-*.html
-
-# ipython
-src/configuration/ipython
-
-# log
-install.log
-
-# ignore htoprc
-htoprc
+# Src
+src/20-tools/emacs/emacs/
+src/20-tools/inkscapslide/inkscapeslide/
