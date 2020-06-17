@@ -33,32 +33,20 @@ PREFIX=$1
 
 if [ "$SERVER_MODE_ON" != true ]
 then
-    case `hostname` in
-        lemagues-surface)
-            (
-                # Preparing
-                git clone git://github.com/EionRobb/skype4pidgin.git
-                cd skype4pidgin/skypeweb
-                mkdir build
-                cd build
+    # Preparing
+    git clone git://github.com/EionRobb/skype4pidgin.git
+    cd skype4pidgin/skypeweb
+    mkdir build
+    cd build
 
-                # Compiling and packing
-                cmake ..
-                cpack
+    # Compiling and packing
+    cmake ..
+    cpack
 
-                # Install
-                sudo apt install -y `ls ./*.deb`
+    # Install
+    sudo apt install -y `ls ./*.deb`
 
-                # Cleaning
-                cd ../../..
-                rm -rfv skype4pidgin
-            )
-            ;;
-        arch)
-            sudo trizen -Syu purple-skypeweb
-            ;;
-        *)
-            exit -1
-            ;;
-    esac
+    # Cleaning
+    cd ../../..
+    rm -rfv skype4pidgin
 fi
