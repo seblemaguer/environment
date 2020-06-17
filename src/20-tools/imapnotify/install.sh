@@ -41,6 +41,9 @@ then
         sudo ln -s /usr/bin/nodejs /usr/bin/node
     fi
 
+    # Fix temporary the path
+    export npm_config_prefix=~/environment/local/npm_packages
+
     # install imapnotify
     npm install -g imapnotify
 
