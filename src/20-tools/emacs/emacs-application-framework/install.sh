@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+# Set environment path to the current directory
 NB_PROC=1
 
 # Dealing with options
@@ -23,16 +24,16 @@ while getopts ":j:hs" opt; do
 done
 shift $OPTIND-1
 
+# Dealing with arguments
 if [ $# -lt 1 ]
 then
     echo "$0 [-s] [-j <nb_proc>] <prefix>"
     exit -1
 fi
-
 PREFIX=$1
+
 
 if [ "$SERVER_MODE_ON" != true ]
 then
-    (cd emacs; zsh install.sh -j $NB_PROC $PREFIX)
-    (cd emacs-application-framework; zsh install.sh -j $NB_PROC $PREFIX)
+    git clone git@github.com:manateelazycat/emacs-application-framework.git
 fi
