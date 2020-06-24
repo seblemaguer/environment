@@ -47,7 +47,7 @@ then
 
     # Configure
     ./autogen.sh
-    ./configure --with-cairo --with-modules --prefix=$PREFIX/emacs
+    ./configure --with-cairo --with-json --with-modules --prefix=$PREFIX/emacs
 
     # Compile
     make -j $NB_PROC
