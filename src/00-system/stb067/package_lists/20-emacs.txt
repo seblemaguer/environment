@@ -6,6 +6,7 @@ exuberant-ctags
 gnutls-bin
 graphviz
 guile-2.0-dev
+jupyter-client
 html2text
 imagemagick
 isync
@@ -38,6 +39,7 @@ plantuml
 pmccabe
 python3-dbus
 python3-feedparser
+python3-ipykernel
 python3-markdown
 python3-pyinotify
 python3-pyqt5
