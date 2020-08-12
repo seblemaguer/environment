@@ -62,3 +62,6 @@ do
     printf "########################### %-60s ##########################\n" $l
     sudo apt-get -y --fix-missing install `sed 's/[ ]*(.*//g' $l | tr '\n' ' '` # TODO: delete empty lines
 done
+
+# Define some group
+sudo usermod -aG docker $USER
