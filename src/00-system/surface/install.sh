@@ -34,6 +34,7 @@ PREFIX=$1
 sudo add-apt-repository --yes "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
 
 # Add surface repository
+wget -qO - https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc \ | sudo apt-key add -
 echo "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main" | sudo tee /etc/apt/sources.list.d/linux-surface.list
 
 # Add xournalpp repository
