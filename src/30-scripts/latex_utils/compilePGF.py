@@ -50,7 +50,7 @@ def main():
 
     # Generate the content
     header = "\\documentclass[crop,tikz,convert={outext=.svg,command=\\unexpanded{pdf2svg \\infile\\space\\outfile}},multi=false]{standalone}[2012/04/13]"
-    if args.with_svg:
+    if not args.with_svg:
         header = "\\documentclass[crop,tikz,multi=false]{standalone}[2012/04/13]"
 
     tex_content = """%s
@@ -87,7 +87,7 @@ def main():
         tex_fh.write(tex_content)
 
     # Compile
-    call(["pdflatex", "-shell-escape", "%s.tex" % basename], cwd=temp_dir)
+    call(["pdflatex", "-interaction=nonstopmode", "-shell-escape", "%s.tex" % basename], cwd=temp_dir)
 
     # Copy
     shutil.copyfile("%s/%s.pdf" % (temp_dir, basename), "%s/%s.pdf" % (output_directory, basename))
