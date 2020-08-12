@@ -46,6 +46,11 @@ sudo add-apt-repository --yes "deb http://download.opensuse.org/repositories/hom
 wget -O- 'https://build.opensuse.org/projects/home:jgeboski/public_key' | sudo apt-key add -
 sudo add-apt-repository --yes ppa:vincent-vandevyvre/vvv
 
+# Add Nodejs repository
+curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
+rm -rfv nodesource_setup.sh
+
 # Update the system
 sudo apt-get update
 sudo apt-get -q -y dist-upgrade
