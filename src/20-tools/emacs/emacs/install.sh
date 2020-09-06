@@ -35,15 +35,10 @@ PREFIX=$1
 
 if [ "$SERVER_MODE_ON" != true ]
 then
-    # Prepare directory
-    mkdir emacs
-    cd emacs
 
     # Get the source
-    git init
-    git remote add origin https://github.com/emacs-mirror/emacs.git
-    git fetch --depth 1 origin emacs-27
-    git reset --hard FETCH_HEAD
+    git clone --branch emacs-27.1 --depth 1 https://github.com/emacs-mirror/emacs.git 
+    cd emacs
 
     # Configure
     ./autogen.sh
