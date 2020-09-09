@@ -32,15 +32,19 @@ fi
 
 PREFIX=$1
 
-if [ "$SERVER_MODE_ON" != true ]
-then
-    (
-        git clone git@github.com:fwcd/kotlin-language-server.git
-        cd kotlin-language-server
-        ./gradlew :server:installDist
-        rsync -avP server/build/install/server/bin/ $PREFIX/bin
-        rsync -avP server/build/install/server/lib/ $PREFIX/lib
-        cd ../
-        rm -rfv kotlin-language-server
-    )
-fi
+(
+    # Prepare
+    git clone git@github.com:fwcd/kotlin-language-server.git
+    cd kotlin-language-server
+
+    # Build
+    ./gradlew :server:installDist --max-workers=$NB_PROC
+
+    # Install
+    rsync -avP server/build/install/server/bin/ $PREFIX/bin
+    rsync -avP server/build/install/server/lib/ $PREFIX/lib
+
+    # Clean
+    cd ../
+    rm -rfv kotlin-language-server
+)

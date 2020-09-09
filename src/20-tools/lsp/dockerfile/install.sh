@@ -32,18 +32,14 @@ fi
 
 PREFIX=$1
 
-if [ "$SERVER_MODE_ON" != true ]
+#FIXME: only ubuntu support for now
+if [ ! -e /usr/bin/node ]
 then
-
-    #FIXME: only ubuntu support for now
-    if [ ! -e /usr/bin/node ]
-    then
-        sudo ln -s /usr/bin/nodejs /usr/bin/node
-    fi
-
-    # Fix temporary global path for node
-    export npm_config_prefix=~/environment/local/npm_packages
-
-    # install imapnotify
-    npm install -g dockerfile-language-server-nodejs
+    sudo ln -s /usr/bin/nodejs /usr/bin/node
 fi
+
+# Fix temporary global path for node
+export npm_config_prefix=~/environment/local/npm_packages
+
+# install imapnotify
+npm install -g dockerfile-language-server-nodejs

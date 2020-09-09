@@ -32,21 +32,22 @@ then
 fi
 PREFIX=$1
 
+# Get the source
+git clone --branch emacs-27.1 --depth 1 https://github.com/emacs-mirror/emacs.git
+cd emacs
+
+# Configure
+./autogen.sh
 
 if [ "$SERVER_MODE_ON" != true ]
 then
-
-    # Get the source
-    git clone --branch emacs-27.1 --depth 1 https://github.com/emacs-mirror/emacs.git 
-    cd emacs
-
-    # Configure
-    ./autogen.sh
     ./configure --with-cairo --with-json --with-modules --prefix=$PREFIX/emacs
-
-    # Compile
-    make -j $NB_PROC
-
-    # Install
-    make install
+else
+    ./configure ---without-xpm --without-gif --with-json --with-modules --prefix=$PREFIX/emacs
 fi
+
+# Compile
+make -j $NB_PROC
+
+# Install
+make install

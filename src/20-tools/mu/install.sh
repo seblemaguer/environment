@@ -35,13 +35,19 @@ PREFIX=$1
 if [ "$SERVER_MODE_ON" != true ]
 then
     (
+        # Prepare
         git clone git@github.com:djcb/mu.git
         cd mu
+
+        # Build
         ./autogen.sh --prefix=$PREFIX
         make -j $NB_PROC
+
+        # Install
         make install
+
+        # Clean
         cd ..
         rm -rfv mu
-
     )
 fi

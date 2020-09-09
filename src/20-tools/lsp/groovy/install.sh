@@ -33,15 +33,19 @@ fi
 
 PREFIX=$1
 
-if [ "$SERVER_MODE_ON" != true ]
-then
-    (
-        git clone git@github.com:prominic/groovy-language-server.git
-        cd groovy-language-server
-        ./gradlew build
-        mkdir -p $PREFIX/lib/
-        cp -rfv build/libs/groovy-language-server-all.jar $PREFIX/lib
-        cd ../
-        rm -rfv groovy-language-server
-    )
-fi
+(
+    # Prepare
+    git clone git@github.com:prominic/groovy-language-server.git
+    cd groovy-language-server
+
+    # Build
+    ./gradlew build --max-workers=$NB_PROC
+
+    # Install
+    mkdir -p $PREFIX/lib/
+    cp -rfv build/libs/groovy-language-server-all.jar $PREFIX/lib
+
+    # Clean
+    cd ../
+    rm -rfv groovy-language-server
+)

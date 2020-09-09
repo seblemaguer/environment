@@ -31,8 +31,17 @@ fi
 
 PREFIX=$1
 
-if [ "$SERVER_MODE_ON" != true ]
-then
-    (cd emacs; zsh install.sh -j $NB_PROC $PREFIX)
-    (cd emacs-application-framework; zsh install.sh -j $NB_PROC $PREFIX)
-fi
+
+# Installing different part
+for src_dir in `ls -d * | grep -v install.sh`
+do
+    echo "=============================================================================="
+    echo "### Installating from $src_dir"
+    echo "=============================================================================="
+    if [ "$SERVER_MODE_ON" = true ]
+    then
+        (cd "$src_dir"; zsh "install.sh" -s -j "$NB_PROC" "$PREFIX")
+    else
+        (cd "$src_dir"; zsh "install.sh"    -j "$NB_PROC" "$PREFIX")
+    fi
+done
