@@ -46,9 +46,12 @@ ln -sf $PWD/cvs/prune_history.sh $PREFIX/bin/prune_history
 ln -sf $PWD/latex_utils/compilePGF.py $PREFIX/bin/compilePGF
 
 # Mailing
-ln -sf $PWD/system/sendmail.sh $PREFIX/bin/sendmail
-ln -sf $PWD/system/stamp_mails.sh $PREFIX/bin/stamp_mails
-ln -sf $PWD/system/syncmail.sh $PREFIX/bin/syncmail
+if [ "$SERVER_MODE_ON" != true ]
+then
+    ln -sf $PWD/system/sendmail.sh $PREFIX/bin/sendmail
+    ln -sf $PWD/system/stamp_mails.sh $PREFIX/bin/stamp_mails
+    ln -sf $PWD/system/syncmail.sh $PREFIX/bin/syncmail
+fi
 ln -sf $PWD/system/emacs.sh $PREFIX/bin/emacs
 
 # Helper
