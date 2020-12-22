@@ -42,8 +42,8 @@ then
         lemagues-surface)
             (cd $PWD/surface; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
             ;;
-        stb067)
-            (cd $PWD/stb067; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
+        sig201)
+            (cd $PWD/sig201; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
             ;;
         *)
             exit -1
