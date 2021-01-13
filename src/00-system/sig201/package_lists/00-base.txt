@@ -1,7 +1,0 @@
-chntpw
-linux-headers-surface
-linux-image-surface
-linux-libc-dev-surface
-surface-ipts-firmware
-linux-surface-secureboot-mok
-libwacom-surface
