@@ -7,3 +7,4 @@ libprotobuf-c-dev
 libpurple-dev
 mercurial
 protobuf-c-compiler
+teams

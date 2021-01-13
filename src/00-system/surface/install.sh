@@ -40,6 +40,10 @@ echo "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main" | sudo 
 # Add xournalpp repository
 sudo add-apt-repository --yes ppa:andreasbutti/xournalpp-master
 
+# Add teams repository
+curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" | sudo tee /etc/apt/sources.list.d/teams.list
+
 # Add bitlbee repository
 sudo add-apt-repository --yes "deb http://download.opensuse.org/repositories/home:/jgeboski/xUbuntu_$(lsb_release -sr) ./"
 
