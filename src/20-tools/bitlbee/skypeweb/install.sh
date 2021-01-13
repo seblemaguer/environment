@@ -34,7 +34,7 @@ PREFIX=$1
 if [ "$SERVER_MODE_ON" != true ]
 then
     # Preparing
-    git clone git://github.com/EionRobb/skype4pidgin.git
+    git clone git@github.com:EionRobb/skype4pidgin.git
     cd skype4pidgin/skypeweb
     mkdir build
     cd build
