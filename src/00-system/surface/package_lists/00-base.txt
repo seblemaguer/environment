@@ -1,6 +1,6 @@
 chntpw
+libwacom-surface
 linux-headers-surface
 linux-image-surface
-surface-ipts-firmware
 linux-surface-secureboot-mok
-libwacom-surface
+surface-ipts-firmware
