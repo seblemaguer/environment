@@ -35,6 +35,9 @@ PREFIX=$1
 if [ "$SERVER_MODE_ON" != true ]
 then
     (
+        PATH=$PATH:$PREFIX/emacs/bin
+        emacs --version
+
         # Prepare
         git clone git@github.com:djcb/mu.git
         cd mu
@@ -48,6 +51,6 @@ then
 
         # Clean
         cd ..
-        rm -rfv mu
+        rm -rf mu
     )
 fi
