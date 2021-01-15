@@ -34,7 +34,6 @@ libwebkit2gtk-4.0-dev
 libxapian-dev
 libxml2-dev
 libxpm-dev
-npm
 plantuml
 pmccabe
 python3-dbus
