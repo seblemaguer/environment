@@ -24,4 +24,5 @@ git submodule update --init
 git submodule update --remote
 
 # Now start the installation
+rm -rf local
 ./install.sh -j $NB_PROC -r
