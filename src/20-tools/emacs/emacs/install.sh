@@ -33,7 +33,7 @@ fi
 PREFIX=$1
 
 # Get the source
-git clone --branch emacs-27.1 --depth 1 https://github.com/emacs-mirror/emacs.git
+git clone --branch master --depth 1 https://github.com/emacs-mirror/emacs.git
 cd emacs
 
 # Configure
@@ -41,9 +41,9 @@ cd emacs
 
 if [ "$SERVER_MODE_ON" != true ]
 then
-    ./configure --with-cairo --with-json --with-modules --prefix=$PREFIX/emacs
+    ./configure --with-cairo --with-json --with-modules --with-xwidgets --with-native-compilation --prefix=$PREFIX/apps/emacs
 else
-    ./configure ---without-xpm --without-gif --with-json --with-modules --prefix=$PREFIX/emacs
+    ./configure ---without-xpm --without-gif --with-json --with-modules --with-native-compilation --prefix=$PREFIX/apps/emacs
 fi
 
 # Compile
