@@ -39,6 +39,7 @@ zsh /tmp/miniconda.sh -q -b -p $PREFIX/miniconda3
 
 # Activate conda (FIXME: should not be needed!)
 source $HOME/environment/local/miniconda3/etc/profile.d/conda.sh
+conda init
 
 # Update conda
 echo "==== Update conda"
@@ -47,7 +48,6 @@ conda update -q -y -n base -c defaults conda
 # Installing the different environment
 for env in `ls -d environments/*`
 do
-
     echo "==== Creating conda environment from $PWD/$env"
     conda env create -q -f $env
 done
