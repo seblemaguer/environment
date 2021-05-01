@@ -7,6 +7,7 @@ cmake
 csh
 default-jdk
 default-jre
+docker.io
 fish
 git
 glib-2.0

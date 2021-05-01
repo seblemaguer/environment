@@ -37,9 +37,6 @@ sudo add-apt-repository --yes "deb http://archive.canonical.com/ $(lsb_release -
 curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" | sudo tee /etc/apt/sources.list.d/teams.list
 
-# Add bitlbee repository
-sudo add-apt-repository --yes "deb http://download.opensuse.org/repositories/home:/jgeboski/xUbuntu_$(lsb_release -sr) ./"
-
 # Add qarte repository
 wget -O- 'https://build.opensuse.org/projects/home:jgeboski/public_key' | sudo apt-key add -
 sudo add-apt-repository --yes ppa:vincent-vandevyvre/vvv
@@ -59,3 +56,6 @@ do
     printf "########################### %-60s ##########################\n" $l
     sudo apt-get -y --fix-missing install `sed 's/[ ]*(.*//g' $l | tr '\n' ' '` # TODO: delete empty lines
 done
+
+# Define some group
+sudo usermod -aG docker $USER

@@ -3,7 +3,6 @@ ghostscript
 latex2html
 ledger
 libreoffice
-npm
 texinfo
 texlive-full
 tipa
