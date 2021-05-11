@@ -1,6 +1,10 @@
 chntpw
+htop
+kitty
 libwacom-surface
-linux-headers-surface
-linux-image-surface
-linux-surface-secureboot-mok
+linux-surface 
+linux-surface-headers 
+iptsd
+# linux-surface-secureboot-mok
 surface-ipts-firmware
+tree

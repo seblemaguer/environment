@@ -30,39 +30,34 @@ fi
 PREFIX=$1
 
 
-# Some activation
-sudo add-apt-repository --yes "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
-
-# Add surface repository
-wget -qO - https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc \ | sudo apt-key add -
-echo "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main" | sudo tee /etc/apt/sources.list.d/linux-surface.list
-
-# Add xournalpp repository
-sudo add-apt-repository --yes ppa:andreasbutti/xournalpp-master
-
-# Add teams repository
-curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" | sudo tee /etc/apt/sources.list.d/teams.list
-
-# Add qarte repository
-wget -O- 'https://build.opensuse.org/projects/home:jgeboski/public_key' | sudo apt-key add -
-sudo add-apt-repository --yes ppa:vincent-vandevyvre/vvv
-
-# Add Nodejs repository
-curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
-sudo bash nodesource_setup.sh
-rm -rfv nodesource_setup.sh
+# Prepare surface specific installation
+if [ `grep -c "linux-surface" /etc/pacman.conf` = 0 ]
+then
+    curl -s https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc | sudo pacman-key --add -
+    sudo pacman-key --finger 56C464BAAC421453
+    sudo pacman-key --lsign-key 56C464BAAC421453
+    echo "" | sudo tee -a /etc/pacman.conf
+    echo "[linux-surface]" | sudo tee -a /etc/pacman.conf
+    echo "Server = https://pkg.surfacelinux.com/arch/" | sudo tee -a /etc/pacman.conf
+fi
 
 # Update the system
-sudo apt-get update
-sudo apt-get -q -y dist-upgrade
+sudo pacman -Syu
 
 # Package installation
+sudo pacman -S --noconfirm yay
 for l in `ls -1 package_lists/*`
 do
     printf "########################### %-60s ##########################\n" $l
-    sudo apt-get -y --fix-missing install `sed 's/[ ]*(.*//g' $l | tr '\n' ' '` # TODO: delete empty lines
+    (
+        unset LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE
+        yay -S --noconfirm `grep -v "^#" $l | sed 's/[ ]*(.*//g' | tr '\n' ' '` # TODO: delete empty lines
+    )
 done
 
 # Define some group
 sudo usermod -aG docker $USER
+
+# Finalize surface
+sudo systemctl enable iptsd
+sudo grub-mkconfig -o /boot/grub/grub.cfg

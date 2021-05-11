@@ -1,3 +1,2 @@
-chrome-gnome-shell
-gnome-tweak-tool
+nautilus-dropbox
 solaar

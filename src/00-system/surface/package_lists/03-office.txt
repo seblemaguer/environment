@@ -3,7 +3,5 @@ ghostscript
 latex2html
 ledger
 libreoffice
-texlive-full
-tipa
-xfonts-tipa
+texlive-most
 xournalpp
