@@ -1,6 +1,5 @@
 chntpw
 htop
-kitty
 libwacom-surface
 linux-surface 
 linux-surface-headers 
@@ -8,3 +7,4 @@ iptsd
 # linux-surface-secureboot-mok
 surface-ipts-firmware
 tree
+wezterm-nightly-bin
