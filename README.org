@@ -1,24 +1,23 @@
 #+TITLE: README of local environment configuration
 #+AUTHOR: Sébastien Le Maguer
 #+EMAIL: slemaguer@coli.uni-saarland.de
-#+DATE: <2015-06-28 So>
-#+DESCRIPTION: 
-#+KEYWORDS: 
+#+DESCRIPTION:
+#+KEYWORDS:
 #+LANGUAGE:  fr
 #+OPTIONS:   H:1 num:t toc:nil  \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
 
-* Global overview 
+* Global overview
 This is my (Sébounet!) environement configuration repository. Everything means to be as automatic as
 possible and as unix platform independent as possible (mac and linux supported but not windows !)
 
-Furthermore, git submodules are used as most as possible in order to maintain updated tools as must
-as possible
 * Architecture
 The architecture respect the following paradigm :
 #+begin_example
 <environment_root>
+     |
+     +--- bootstrap.sh
      |
      +--- install.sh
      |
@@ -29,32 +28,22 @@ The architecture respect the following paradigm :
      |     +----- include
      |     |
      |     +----- lib
+     |     |
+     |     +----- ...
      |
      +--- src
      |     |
-     |     +----- configuration
      |     |
-     |     +----- system
+     |     +----- 00-system
      |     |
      |     +----- ...
 #+end_example
 
+- *bootstrap.sh* resets the environment by delete *local* and calling *install.sh*
 - *install.sh* contains the installation process
-- *local* contains the local environment. It is a replicate of the /usr linux architecture 
+- *local* contains the local environment. It is a replicate of the /usr linux architecture
 - *src* contains all submodules or dedicated source kit. In order to add a new tool you need to
   create a dedicated directory which contains :
   + *install.sh* for the dedicated installation procedure
   + *<directory>* which contains the submodule of the dedicated tool or a specific source directory
     if there is not any submodule available
-
-Two specific directories are also present :
-  - *src/configuration* contains all the dedicated configuration part
-  - *src/system* contains system dedicated configuration like package installation,...
-* Current status
-** List of current supported tools
-- emacs
-- colorgcc
-- inkscapeslide
-** List of current supported systems
-- macos (maverick, yosemite)
-- ubuntu
