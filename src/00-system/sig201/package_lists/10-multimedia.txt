@@ -4,12 +4,11 @@ ffmpeg
 gimp
 imagemagick
 inkscape (SLM: simple vectorize picture design tool)
-librsvg2-dev
 mjpegtools
 mkcue
 mpv
+musescore
 pdftk
-praat
-qcomicbook
+reaper-bin
 recode
 shntool

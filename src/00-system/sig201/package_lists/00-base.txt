@@ -1,0 +1,4 @@
+chntpw
+htop
+tree
+wezterm

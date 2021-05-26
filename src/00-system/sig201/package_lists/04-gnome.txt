@@ -1,3 +1,4 @@
-chrome-gnome-shell
-gnome-tweak-tool
+firefox
+nautilus-dropbox
+pcloud-drive
 solaar

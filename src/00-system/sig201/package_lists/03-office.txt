@@ -1,9 +1,9 @@
 bibclean
+calibre
+calibre-plugin-dedrm
 ghostscript
 latex2html
 ledger
 libreoffice
-texinfo
-texlive-full
-tipa
-xfonts-tipa
+texlive-most
+xournalpp

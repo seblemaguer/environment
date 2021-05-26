@@ -30,31 +30,18 @@ fi
 PREFIX=$1
 
 
-# Some activation
-sudo add-apt-repository --yes "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
-
-# Add teams repository
-curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" | sudo tee /etc/apt/sources.list.d/teams.list
-
-# Add qarte repository
-wget -O- 'https://build.opensuse.org/projects/home:jgeboski/public_key' | sudo apt-key add -
-sudo add-apt-repository --yes ppa:vincent-vandevyvre/vvv
-
-# Add Nodejs repository
-curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
-sudo bash nodesource_setup.sh
-rm -rfv nodesource_setup.sh
-
 # Update the system
-sudo apt-get update
-sudo apt-get -q -y dist-upgrade
+sudo pacman -Syu
 
 # Package installation
+sudo pacman -S --noconfirm yay
 for l in `ls -1 package_lists/*`
 do
     printf "########################### %-60s ##########################\n" $l
-    sudo apt-get -y --fix-missing install `sed 's/[ ]*(.*//g' $l | tr '\n' ' '` # TODO: delete empty lines
+    (
+        unset LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE
+        yay -S --noconfirm `grep -v "^#" $l | sed 's/[ ]*(.*//g' | tr '\n' ' '` # TODO: delete empty lines
+    )
 done
 
 # Define some group

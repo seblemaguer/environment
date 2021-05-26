@@ -1,4 +1,0 @@
-libblas-dev
-liblapack-dev
-octave
-r-base
