@@ -1,4 +1,6 @@
 bibclean
+calibre
+calibre-plugin-dedrm
 ghostscript
 latex2html
 ledger

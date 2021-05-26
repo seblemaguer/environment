@@ -7,4 +7,4 @@ iptsd
 # linux-surface-secureboot-mok
 surface-ipts-firmware
 tree
-wezterm-nightly-bin
+wezterm
