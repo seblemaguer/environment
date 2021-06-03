@@ -32,27 +32,14 @@ PREFIX=$1
 # Music part
 if [ "$SERVER_MODE_ON" != true ]
 then
-    ln -sf $PWD/music_management/cover_convert.sh $PREFIX/bin/cover_convert
-    ln -sf $PWD/music_management/split2flac.sh $PREFIX/bin/split2flac
-    ln -sf $PWD/music_management/explode_flac.sh $PREFIX/bin/explode_flac
-    ln -sf $PWD/music_management/emms-print-metadata.pl $PREFIX/bin/emms-print-metadata
+    for f in $(find . -name '*.*')
+    do
+        dir=$(dirname $f)
+        if [ "$dir" != "." ]
+        then
+            base=$(basename $f | cut -d'.' -f 1)
+            f=$(realpath $f)
+            ln -s $f $PREFIX/bin/$base
+        fi
+    done
 fi
-
-# Versioning part
-ln -sf $PWD/cvs/init_git.sh $PREFIX/bin/init_git
-ln -sf $PWD/cvs/prune_history.sh $PREFIX/bin/prune_history
-
-# Latex part
-ln -sf $PWD/latex_utils/compilePGF.py $PREFIX/bin/compilePGF
-
-# Mailing
-if [ "$SERVER_MODE_ON" != true ]
-then
-    ln -sf $PWD/system/sendmail.sh $PREFIX/bin/sendmail
-    ln -sf $PWD/system/stamp_mails.sh $PREFIX/bin/stamp_mails
-    ln -sf $PWD/system/syncmail.sh $PREFIX/bin/syncmail
-fi
-ln -sf $PWD/system/emacs.sh $PREFIX/bin/emacs
-
-# Helper
-ln -sf $PWD/system/rename.pl $PREFIX/bin/rename
