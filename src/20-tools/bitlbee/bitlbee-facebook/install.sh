@@ -33,7 +33,18 @@ PREFIX=$1
 
 if [ "$SERVER_MODE_ON" != true ]
 then
-    (cd purple-hangout; zsh install.sh -j $NB_PROC $PREFIX)
-    (cd skypeweb; zsh install.sh -j $NB_PROC $PREFIX)
-    (cd bitlbee-facebook; zsh install.sh -j $NB_PROC $PREFIX)
+    # Preparing
+    git clone git@github.com:seblemaguer/bitlbee-facebook.git bitlbee-facebook
+    cd bitlbee-facebook
+    git checkout functionnal
+
+    # Compile and install
+    ./autogen.sh
+    ./configure
+    make -j $NB_PROC
+    sudo make install
+
+    # Cleaning
+    cd ../
+    rm -rfv bitlbee-facebook
 fi

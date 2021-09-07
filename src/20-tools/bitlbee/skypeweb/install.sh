@@ -36,17 +36,10 @@ then
     # Preparing
     git clone git@github.com:EionRobb/skype4pidgin.git
     cd skype4pidgin/skypeweb
-    mkdir build
-    cd build
-
-    # Compiling and packing
-    cmake ..
-    cpack
-
-    # Install
-    sudo apt install -y `ls ./*.deb`
+    make
+    sudo make install
 
     # Cleaning
-    cd ../../..
-    rm -rfv skype4pidgin
+    cd ../..
+    rm -rf skype4pidgin
 fi
