@@ -1,2 +1,3 @@
+bitlbee-libpurple
 teams
 zoom
