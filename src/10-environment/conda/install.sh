@@ -38,7 +38,7 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /t
 zsh /tmp/miniconda.sh -q -b -p $PREFIX/miniconda3
 
 # Activate conda (FIXME: should not be needed!)
-source $HOME/environment/local/miniconda3/etc/profile.d/conda.sh
+source $PREFIX/miniconda3/etc/profile.d/conda.sh
 conda init
 
 # Update conda
