@@ -7,8 +7,8 @@ then
 fi
 
 # Have better variable names
-album_dir=$(realpath $1)
-root_dir=$(realpath $2)
+album_dir=$(realpath "$1")
+root_dir=$(realpath "$2")
 
 shopt -s nullglob
 list_tracks=("$album_dir"/*.flac)
@@ -18,7 +18,7 @@ IFS=$'\n'
 for track_file in ${list_tracks[@]}
 do
     # Extract proper variables
-    part_to_parse=$(echo $track_file | sed "s%$root_dir/%%g")
+    part_to_parse=$(echo "$track_file" | sed "s%$root_dir/%%g")
     ARTIST=$(echo $part_to_parse | sed "s%/.*%%g")
     ALBUM=$(echo $part_to_parse | sed "s%[^/]*/[0-9]\+ - \([^/]*\)/.*%\1%g")
     DATE=$(echo $part_to_parse | sed "s%[^/]*/\([0-9]\+\) - .*%\1%g")
@@ -31,5 +31,4 @@ do
     tag=TITLE;       metaflac --remove-tag=$tag "--set-tag=$tag=$TITLE" "$track_file"
     tag=TRACKNUMBER; metaflac --remove-tag=$tag "--set-tag=$tag=$TRACKNUMBER" "$track_file"
     tag=DATE;        metaflac --remove-tag=$tag "--set-tag=$tag=$DATE" "$track_file"
-
 done
