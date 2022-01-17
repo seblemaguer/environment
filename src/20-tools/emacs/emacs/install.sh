@@ -32,7 +32,8 @@ then
 fi
 PREFIX=$1
 
-# Get the source
+# Reset the source the source
+rm -rfv emacs
 git clone --branch master --depth 1 https://github.com/emacs-mirror/emacs.git
 cd emacs
 
