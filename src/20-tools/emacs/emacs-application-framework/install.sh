@@ -35,6 +35,7 @@ PREFIX=$1
 
 if [ "$SERVER_MODE_ON" != true ]
 then
+    rm -rfv emacs-application-framework
     git clone --depth=1 git@github.com:manateelazycat/emacs-application-framework.git
-    (cd emacs-application-framework; bash install-eaf.sh)
+    (cd emacs-application-framework; ./install-eaf.py --install-all-apps --force)
 fi
