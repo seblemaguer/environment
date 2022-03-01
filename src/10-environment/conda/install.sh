@@ -32,6 +32,7 @@ then
 fi
 PREFIX=$1
 
+
 # Conda and install conda
 echo "==== Get conda"
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
@@ -44,6 +45,11 @@ conda init
 # Update conda
 echo "==== Update conda"
 conda update -q -y -n base -c defaults conda
+
+# Install baseline
+echo "=== Install mamba ipython & black in the base environment"
+conda install -y mamba ipython black -n base -c conda-forge
+mamba init
 
 # Installing the different environment
 for env in `ls -d environments/*`
