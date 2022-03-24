@@ -33,7 +33,6 @@ PREFIX=$1
 
 if [ "$SERVER_MODE_ON" != true ]
 then
-    (cd purple-hangout; zsh install.sh -j $NB_PROC $PREFIX)
     (cd skypeweb; zsh install.sh -j $NB_PROC $PREFIX)
     (cd bitlbee-facebook; zsh install.sh -j $NB_PROC $PREFIX)
 fi
