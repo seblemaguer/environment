@@ -12,3 +12,4 @@ pdftk
 reaper-bin
 recode
 shntool
+yt-dlp

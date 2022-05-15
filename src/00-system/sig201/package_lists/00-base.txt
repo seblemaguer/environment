@@ -1,4 +1,0 @@
-chntpw
-htop
-tree
-wezterm

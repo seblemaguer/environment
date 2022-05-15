@@ -1,4 +1,9 @@
 aria2
+bibtex-tidy
 isync
 libgccjit
+telegram-td-lib
+ttf-nerd-fonts-symbols
+ttf-roboto
+ttf-roboto-mono
 xapian-core
