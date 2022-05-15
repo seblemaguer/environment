@@ -1,2 +1,7 @@
 aria2
+bibtex-tidy
 libgccjit
+telegram-td-lib
+ttf-nerd-fonts-symbols
+ttf-roboto
+ttf-roboto-mono

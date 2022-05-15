@@ -1,12 +1,9 @@
-base-devel
 byobu
 clang
 cmake
-csh
 docker
 docker-compose
 fish
-git
-glib-2.0
 graphviz
+npm
 sox

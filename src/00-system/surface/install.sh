@@ -29,23 +29,23 @@ fi
 
 PREFIX=$1
 
-
 # Prepare surface specific installation
 if [ `grep -c "linux-surface" /etc/pacman.conf` = 0 ]
 then
-    curl -s https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc | sudo pacman-key --add -
-    sudo pacman-key --finger 56C464BAAC421453
-    sudo pacman-key --lsign-key 56C464BAAC421453
-    echo "" | sudo tee -a /etc/pacman.conf
-    echo "[linux-surface]" | sudo tee -a /etc/pacman.conf
-    echo "Server = https://pkg.surfacelinux.com/arch/" | sudo tee -a /etc/pacman.conf
+    # curl -s https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc | sudo pacman-key --add -
+    # sudo pacman-key --finger 56C464BAAC421453
+    # sudo pacman-key --lsign-key 56C464BAAC421453
+    # echo "" | sudo tee -a /etc/pacman.conf
+    # echo "[linux-surface]" | sudo tee -a /etc/pacman.conf
+    # echo "Server = https://pkg.surfacelinux.com/arch/" | sudo tee -a /etc/pacman.conf
+    echo "We ignore this for now!"
 fi
 
 # Update the system
 sudo pacman -Syu
 
 # Package installation
-sudo pacman -S --noconfirm yay
+# sudo pacman -S --noconfirm yay
 for l in `ls -1 package_lists/*`
 do
     printf "########################### %-60s ##########################\n" $l
