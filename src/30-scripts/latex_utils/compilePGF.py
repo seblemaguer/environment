@@ -54,9 +54,39 @@ def main():
         header = "\\documentclass[crop,tikz,multi=false]{standalone}[2012/04/13]"
 
     tex_content = """%s
-    \\usepackage[utf8]{inputenc}
     \\usepackage{pgfplots}
     \\DeclareUnicodeCharacter{2212}{−}
+
+    %% fonts and encoding
+    \\usepackage{lmodern}
+    \\usepackage{ifxetex}
+    \\ifxetex
+            \\usepackage{mathspec}
+            \\setprimaryfont{Times}
+            \\setallmonofonts{Courier}
+    \\else
+        \\usepackage[utf8]{inputenc}
+        \\usepackage[T1]{fontenc}
+        \\usepackage{mathptmx}
+        \\usepackage{helvet}
+        \\renewcommand\\familydefault{phv}
+    \\fi
+    \\usepackage[normalem]{ulem}
+    \\usepackage{amsmath}
+    \\usepackage{textcomp}
+    \\usepackage{amssymb}
+
+
+    %% = table tweakery
+    \\usepackage{tabularx}
+    \\usepackage{tabulary}
+    \\usepackage{booktabs}
+    \\usepackage{color}
+    \\usepackage{colortbl}
+    \\usepackage{multirow}
+    \\usepackage{multicol}
+    \\usepackage{hhline}
+
     \\usepgfplotslibrary{groupplots,dateplot}
     \\usetikzlibrary{patterns,shapes.arrows}
     \\pgfplotsset{compat=newest}
