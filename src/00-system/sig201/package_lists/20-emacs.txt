@@ -1,5 +1,6 @@
 aria2
 bibtex-tidy
+cyrus-sasl-xoauth2-git
 isync
 libgccjit
 telegram-td-lib
