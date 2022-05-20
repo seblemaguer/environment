@@ -7,6 +7,6 @@ archives
 auto
 
 # Src
-src/20-tools/emacs/emacs/emacs/
+src/20-tools/emacs/emacs/
 src/20-tools/inkscapslide/inkscapeslide/
 src/20-tools/imapnotify/node-imapnotify/

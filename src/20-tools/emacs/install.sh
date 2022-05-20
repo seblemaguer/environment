@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+# Set environment path to the current directory
 NB_PROC=1
 
 # Dealing with options
@@ -23,25 +24,32 @@ while getopts ":j:hs" opt; do
 done
 shift $OPTIND-1
 
+# Dealing with arguments
 if [ $# -lt 1 ]
 then
     echo "$0 [-s] [-j <nb_proc>] <prefix>"
     exit -1
 fi
-
 PREFIX=$1
 
+# Reset the source the source
+rm -rfv emacs
+git clone --branch master --depth 1 https://github.com/emacs-mirror/emacs.git
+cd emacs
 
-# Installing different part
-for src_dir in `ls -d * | grep -v install.sh`
-do
-    echo "=============================================================================="
-    echo "### Installating from $src_dir"
-    echo "=============================================================================="
-    if [ "$SERVER_MODE_ON" = true ]
-    then
-        (cd "$src_dir"; zsh "install.sh" -s -j "$NB_PROC" "$PREFIX")
-    else
-        (cd "$src_dir"; zsh "install.sh"    -j "$NB_PROC" "$PREFIX")
-    fi
-done
+# Configure
+./autogen.sh
+
+if [ "$SERVER_MODE_ON" != true ]
+then
+    # ./configure --with-pgtk --with-json --with-modules --with-xwidgets --with-native-compilation --prefix=$PREFIX/apps/emacs
+    ./configure --with-json --with-modules --with-xwidgets --with-native-compilation --prefix=$PREFIX/apps/emacs
+else
+    ./configure ---without-xpm --without-gif --with-json --with-modules --with-native-compilation --prefix=$PREFIX/apps/emacs
+fi
+
+# Compile
+make -j $NB_PROC
+
+# Install
+make install
