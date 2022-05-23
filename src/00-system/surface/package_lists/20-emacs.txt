@@ -5,3 +5,5 @@ telegram-td-lib
 ttf-nerd-fonts-symbols
 ttf-roboto
 ttf-roboto-mono
+ttf-symbola
+ttf-unifont
