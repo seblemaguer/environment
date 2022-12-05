@@ -141,4 +141,4 @@ if __name__ == "__main__":
             if tgt_dir not in album_dir_set:
                 album_dir_set.add(tgt_dir)
                 logger.info(f"Copy {i.parent}")
-                shutil.copytree(i.parent, tgt_dir)
+                shutil.copytree(i.parent, tgt_dir, dirs_exist_ok=True)

@@ -112,4 +112,4 @@ done
 rm -rf cover.jpg
 rm -rf ~/.split2flac_*
 
-python3 ~/Dropbox/music/generate_change_log.py $OUT
+python3 ~/shared/org-roam/perso/music/generate_change_log.py $OUT
