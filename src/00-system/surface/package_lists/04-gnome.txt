@@ -1,6 +1,5 @@
 firefox
-nautilus-dropbox
+kitty
 pavucontrol
-pcloud-drive
 solaar
-wezterm
+syncthing
