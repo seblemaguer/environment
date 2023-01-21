@@ -1,3 +1,6 @@
+autoconf
+automake
+btop
 byobu
 clang
 cmake
@@ -5,5 +8,9 @@ docker
 docker-compose
 fish
 graphviz
+htops
+libtool
 npm
 sox
+util-linux-user
+vim

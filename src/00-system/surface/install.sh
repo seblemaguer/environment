@@ -29,35 +29,39 @@ fi
 
 PREFIX=$1
 
-# Prepare surface specific installation
-if [ `grep -c "linux-surface" /etc/pacman.conf` = 0 ]
-then
-    # curl -s https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc | sudo pacman-key --add -
-    # sudo pacman-key --finger 56C464BAAC421453
-    # sudo pacman-key --lsign-key 56C464BAAC421453
-    # echo "" | sudo tee -a /etc/pacman.conf
-    # echo "[linux-surface]" | sudo tee -a /etc/pacman.conf
-    # echo "Server = https://pkg.surfacelinux.com/arch/" | sudo tee -a /etc/pacman.conf
-    echo "We ignore this for now!"
-fi
+sudo dnf -y upgrade
+sudo dnf -y update
 
-# Update the system
-sudo pacman -Syu
+# Install surface part
+sudo dnf -y config-manager \
+     --add-repo=https://pkg.surfacelinux.com/fedora/linux-surface.repo
+sudo dnf -y install --allowerasing kernel-surface kernel-surface-devel iptsd libwacom-surface
+sudo systemctl enable iptsd
+sudo dnf -y install surface-secureboot
 
-# Package installation
-# sudo pacman -S --noconfirm yay
+# Ensure the proper kernel is installed
+sudo cp $PWD/attachments/default-kernel.path /etc/systemd/system/default-kernel.path
+sudo cp $PWD/attachments/default-kernel.service /etc/systemd/system/default-kernel.service
+sudo systemctl enable default-kernel.path
+sudo grubby --set-default /boot/vmlinuz*surface*
+
+# Add brave repository
+sudo dnf -y config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+
+# Add font repository
+sudo dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+# Install the packages
 for l in `ls -1 package_lists/*`
 do
     printf "########################### %-60s ##########################\n" $l
     (
-        unset LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE
-        yay -S --noconfirm `grep -v "^#" $l | sed 's/[ ]*(.*//g' | tr '\n' ' '` # TODO: delete empty lines
+        sudo dnf -y install `grep -v "^#" $l | sed 's/[ ]*(.*//g' | tr '\n' ' '` # TODO: delete empty lines
     )
 done
 
-# Define some group
+# Define some user specificities
 sudo usermod -aG docker $USER
-
-# Finalize surface
-sudo systemctl enable iptsd
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+sudo chsh -s /bin/zsh $USER
+gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
