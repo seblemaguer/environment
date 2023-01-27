@@ -32,22 +32,22 @@ then
 fi
 PREFIX=$1
 
+# GDU
+curl -L https://github.com/dundee/gdu/releases/latest/download/gdu_linux_amd64.tgz | tar xz
+chmod +x gdu_linux_amd64
+mv gdu_linux_amd64 $PREFIX/bin/gdu
 
-VERSION=0.1.1
+
+# Delta
+VERSION=0.15
 SUFFIX=x86_64-unknown-linux-musl
 BASENAME=delta-${VERSION}-${SUFFIX}
-URL=https://github.com/dandavison/delta/releases/download/${VERSION}/${BASENAME}.tar.gz
-
-# Retrieve
-wget $URL
-
-# Extract
-tar xzvf ${BASENAME}.tar.gz
+curl -L https://github.com/dandavison/delta/releases/download/${VERSION}/${BASENAME}.tar.gz \
+     --output /dev/stdout \
+    | tar xz
 
 # Install
-cd $BASENAME
-cp -rfv delta $PREFIX/bin/delta
+cp -rfv $BASENAME/delta $PREFIX/bin/delta
 
 # Clean
-cd ..
-rm -rfv $BASENAME $BASENAME.tar.gz
+rm -rfv $BASENAME
