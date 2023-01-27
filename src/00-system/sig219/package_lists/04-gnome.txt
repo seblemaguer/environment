@@ -1,0 +1,7 @@
+brave-browser
+keepassxc
+kitty
+pavucontrol
+solaar
+syncthing
+trash-cli

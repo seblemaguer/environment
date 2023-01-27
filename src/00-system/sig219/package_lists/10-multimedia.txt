@@ -1,0 +1,12 @@
+ImageMagick
+abcde
+cuetools
+ffmpeg-free
+gimp
+inkscape (SLM: simple vectorize picture design tool)
+mpv
+musescore
+pdftk
+recode
+shntool
+yt-dlp
