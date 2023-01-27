@@ -14,7 +14,7 @@ librsvg2-devel
 libtiff-devel
 libtree-sitter-devel
 ncurses-devel
-ncurses-devel
+php
 poppler-devel
 poppler-glib-devel
 unifont-fonts.noarch
