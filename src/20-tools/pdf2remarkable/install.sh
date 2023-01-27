@@ -39,6 +39,7 @@ then
     (
         cd reMarkableScripts
         cp -rfv pdf2remarkable.sh $PREFIX/bin/pdf2remarkable
+	cd ..
         rm -rfv reMarkableScripts
     )
 fi
