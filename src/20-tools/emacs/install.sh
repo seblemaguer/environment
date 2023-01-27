@@ -53,3 +53,33 @@ make -j $NB_PROC
 
 # Install
 make install
+
+# Clean
+cd ../
+rm -rf emacs
+
+#############################################
+# Install tdlib (needed for telega)
+##############################################
+
+if [ "$SERVER_MODE_ON" != true ]
+then
+    git clone --branch master --depth 1 https://github.com/tdlib/td
+    cd td
+    mkdir build
+    cd build
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX ..
+    cmake --build . --target prepare_cross_compiling -j $NB_PROC
+
+    # This bit is necessary to avoid memory overflow
+    cd ..
+    php SplitSource.php
+    cd build
+    cmake --build . --target tdjson -j $NB_PROC
+    cmake --build . --target tdjson_static -j $NB_PROC
+
+    # Now we install and clean
+    make install
+    cd ../..
+    rm -rfv td
+fi
