@@ -42,8 +42,8 @@ then
         surface)
             (cd $PWD/surface; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
             ;;
-        sig201)
-            (cd $PWD/sig201; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
+        sig219.mee.tcd.ie)
+            (cd $PWD/sig219; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
             ;;
         *)
             exit -1

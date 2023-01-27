@@ -1,9 +1,0 @@
-byobu
-clang
-cmake
-docker
-docker-compose
-fish
-graphviz
-npm
-sox
