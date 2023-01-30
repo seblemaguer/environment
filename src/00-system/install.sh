@@ -49,4 +49,10 @@ then
             exit -1
             ;;
     esac
+
+    for tool in $(ls specific/*.sh)
+    do
+        echo "### Install ${tool}"
+        zsh "$tool"
+    done
 fi
