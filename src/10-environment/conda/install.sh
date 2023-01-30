@@ -33,31 +33,30 @@ fi
 PREFIX=$1
 
 
-# Conda and install conda
-echo "==== Get conda"
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
-zsh /tmp/miniconda.sh -q -b -p $PREFIX/miniconda3
+# Install mamba
+echo "==== Get Mamba"
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-$(uname)-$(uname -m).sh"
+bash "Mambaforge-pypy3-$(uname)-$(uname -m).sh" -b -p "${PREFIX}/miniconda3"
+
+source "${PREFIX}/miniconda3/etc/profile.d/conda.sh"
+conda activate
+source "${PREFIX}/miniconda3/etc/profile.d/mamba.sh"
 
 # Activate conda (FIXME: should not be needed!)
 source $PREFIX/miniconda3/etc/profile.d/conda.sh
 conda init
 
-# Update conda
-echo "==== Update conda"
-conda update -q -y -n base -c defaults conda
-
-# Install baseline
-echo "=== Install mamba ipython & black in the base environment"
-conda install -y mamba ipython black -n base -c conda-forge
-mamba init
+# Install baseline packages
+echo "=== Install ipython & black in the base environment"
+mamba install -y ipython black -n base -c conda-forge
 
 # Installing the different environment
 for env in `ls -d environments/*`
 do
     echo "==== Creating conda environment from $PWD/$env"
-    conda env create -q -f $env
+    mamba env create -q -f $env
 done
 
 # Cleaning
 echo "==== Cleaning conda installer"
-rm -rfv /tmp/miniconda.sh
+rm -rfv "Mambaforge-pypy3-$(uname)-$(uname -m).sh"
