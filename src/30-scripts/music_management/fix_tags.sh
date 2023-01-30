@@ -31,4 +31,5 @@ do
     tag=TITLE;       metaflac --remove-tag=$tag "--set-tag=$tag=$TITLE" "$track_file"
     tag=TRACKNUMBER; metaflac --remove-tag=$tag "--set-tag=$tag=$TRACKNUMBER" "$track_file"
     tag=DATE;        metaflac --remove-tag=$tag "--set-tag=$tag=$DATE" "$track_file"
+    echo "Track ${ARTIST}/${DATE} - ${ALBUM}/${TRACKNUMBER} - ${TITLE}.flac is fixed"
 done
