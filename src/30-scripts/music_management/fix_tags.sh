@@ -2,7 +2,7 @@
 
 if [ $# -ne 2 ]
 then
-    echo "Command should be: $0 <album_dir> <root_dir>"
+    echo "($#) Command should be: $0 <album_dir> <root_dir>"
     exit -1
 fi
 
