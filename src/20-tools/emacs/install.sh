@@ -42,8 +42,7 @@ cd emacs
 
 if [ "$SERVER_MODE_ON" != true ]
 then
-    # ./configure --with-pgtk --with-json --with-modules --with-xwidgets --with-native-compilation --prefix=$PREFIX/apps/emacs
-    ./configure --with-json --with-modules --with-xwidgets --with-native-compilation --prefix=$PREFIX/apps/emacs
+    ./configure --with-pgtk --with-json --with-modules --with-xwidgets --with-native-compilation --prefix=$PREFIX/apps/emacs
 else
     ./configure ---without-xpm --without-gif --with-json --with-modules --with-native-compilation --prefix=$PREFIX/apps/emacs
 fi
