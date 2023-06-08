@@ -39,7 +39,7 @@ then
         then
             base=$(basename $f | cut -d'.' -f 1)
             f=$(realpath $f)
-            ln -s $f $PREFIX/bin/$base
+            ln -sf $f $PREFIX/bin/$base
         fi
     done
 fi
