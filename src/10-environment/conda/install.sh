@@ -48,7 +48,7 @@ conda init
 
 # Install baseline packages
 echo "=== Install ipython & black in the base environment"
-mamba install -y ipython black -n base -c conda-forge
+mamba install -y ipython black pandas -n base -c conda-forge
 
 # Installing the different environment
 for env in `ls -d environments/*`
