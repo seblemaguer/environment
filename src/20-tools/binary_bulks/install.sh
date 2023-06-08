@@ -39,7 +39,7 @@ mv gdu_linux_amd64 $PREFIX/bin/gdu
 
 
 # Delta
-VERSION=0.15
+VERSION=0.16.5
 SUFFIX=x86_64-unknown-linux-musl
 BASENAME=delta-${VERSION}-${SUFFIX}
 curl -L https://github.com/dandavison/delta/releases/download/${VERSION}/${BASENAME}.tar.gz \
