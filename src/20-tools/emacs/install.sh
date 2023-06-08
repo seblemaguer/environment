@@ -42,11 +42,10 @@ cd emacs
 
 if [ "$SERVER_MODE_ON" != true ]
 then
-    ./configure --with-pgtk --with-json --with-modules --with-xwidgets --with-native-compilation --prefix=$PREFIX/apps/emacs
+    ./configure --with-pgtk                  --with-json --with-modules --with-x-toolkit=gtk3 --with-xwidgets --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs
 else
-    ./configure ---without-xpm --without-gif --with-json --with-modules --with-native-compilation --prefix=$PREFIX/apps/emacs
+    ./configure ---without-xpm --without-gif --with-json --with-modules                                       --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs
 fi
-
 # Compile
 make -j $NB_PROC
 
@@ -57,10 +56,24 @@ make install
 cd ../
 rm -rf emacs
 
+
+#############################################
+# Install tree-sitter helpers
+##############################################
+if [ "$SERVER_MODE_ON" != true ]
+then
+    git clone https://github.com/casouri/tree-sitter-module.git
+    cd tree-sitter-module
+    JOBS=$NB_PROC ./batch.sh
+    mkdir ~/.emacs.d/tree-sitter
+    cp -rfv dist/* ~/.emacs.d/tree-sitter
+    cd ..
+    rm -rf tree-sitter-module
+fi
+
 #############################################
 # Install tdlib (needed for telega)
 ##############################################
-
 if [ "$SERVER_MODE_ON" != true ]
 then
     git clone --branch master --depth 1 https://github.com/tdlib/td
