@@ -93,5 +93,5 @@ then
     # Now we install and clean
     make install
     cd ../..
-    rm -rfv td
+    rm -rf td
 fi
