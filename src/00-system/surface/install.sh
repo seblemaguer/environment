@@ -57,7 +57,7 @@ for l in `ls -1 package_lists/*`
 do
     printf "########################### %-60s ##########################\n" $l
     (
-        sudo dnf -y install `grep -v "^#" $l | sed 's/[ ]*(.*//g' | tr '\n' ' '` # TODO: delete empty lines
+        sudo dnf -y install --skip-broken $(grep -v "^#" $l | sed 's/[ ]*(.*//g' | tr '\n' ' ') # TODO: delete empty lines
     )
 done
 

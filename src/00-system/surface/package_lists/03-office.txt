@@ -1,7 +1,9 @@
+brave-browser
 calibre
 ghostscript
 latex2html
 ledger
 libreoffice
-texlive-scheme-medium
+texlive-scheme-full
 xournalpp
+okular

@@ -10,3 +10,5 @@ pdftk
 recode
 shntool
 yt-dlp
+openh264
+vlc
