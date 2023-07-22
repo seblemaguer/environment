@@ -3,8 +3,11 @@ automake
 btop
 byobu
 clang
+clang-tools-extra
 cmake
-docker
+containerd.io
+docker-ce
+docker-ce-cli
 docker-compose
 fish
 git-delta
@@ -13,6 +16,7 @@ graphviz
 htop
 libtool
 npm
+python-lsp-server
 sox
 util-linux-user
 vim
