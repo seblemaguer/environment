@@ -95,3 +95,27 @@ then
     cd ../..
     rm -rf td
 fi
+
+#############################################
+# Install language servers
+##############################################
+if [ "$SERVER_MODE_ON" != true ]
+then
+    # Easy NPM based installation
+    npm install -g bash-language-server
+    npm install -g @emacs-grammarly/grammarly-languageserver
+    npm install -g dockerfile-language-server-nodejs
+
+    # kotlin is a bit more tricky
+    git clone https://github.com/fwcd/kotlin-language-server.git
+    (
+        cd kotlin-language-server;
+        ./gradlew :server:installDist;
+        cp server/build/install/server/bin/kotlin-language-server $PREFIX/bin;
+        cp server/build/install/server/lib/* $PREFIX/lib
+    )
+    rm -rfv kotlin-language-server
+
+    # Pip/Python ones to install
+    pip install cmake-language-server
+fi
