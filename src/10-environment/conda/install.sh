@@ -34,29 +34,19 @@ PREFIX=$1
 
 
 # Install mamba
-echo "==== Get Mamba"
-curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-$(uname)-$(uname -m).sh"
-bash "Mambaforge-pypy3-$(uname)-$(uname -m).sh" -b -p "${PREFIX}/miniconda3"
+echo "==== Get Microamba"
+BIN_FOLDER=$PREFIX/bin INIT_YES=yes CONDA_FORGE_YES=yes PREFIX_LOCATION=$PREFIX/micromamba  "${SHELL}" <(curl -L micro.mamba.pm/install.sh) <&-
 
-source "${PREFIX}/miniconda3/etc/profile.d/conda.sh"
-conda activate
-source "${PREFIX}/miniconda3/etc/profile.d/mamba.sh"
-
-# Activate conda (FIXME: should not be needed!)
-source $PREFIX/miniconda3/etc/profile.d/conda.sh
-conda init
+exit 0
+alias conda=micromamba
 
 # Install baseline packages
 echo "=== Install ipython & black in the base environment"
-mamba install -y ipython black pandas -n base -c conda-forge
+conda install -y ipython black pandas -n base -c conda-forge
 
 # Installing the different environment
 for env in `ls -d environments/*`
 do
     echo "==== Creating conda environment from $PWD/$env"
-    mamba env create -q -f $env
+    conda env create -q -f $env
 done
-
-# Cleaning
-echo "==== Cleaning conda installer"
-rm -rfv "Mambaforge-pypy3-$(uname)-$(uname -m).sh"
