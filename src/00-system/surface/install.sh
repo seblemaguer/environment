@@ -61,6 +61,12 @@ do
     )
 done
 
+# Deal with multimedia bits (FIXME: see how to make this a bit more integrated)
+sudo dnf install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-plugin-libav --exclude=gstreamer1-plugins-bad-free-devel
+sudo dnf install lame\* --exclude=lame-devel
+sudo dnf group upgrade --with-optional Multimedia --allowerasing
+sudo dnf remove totem
+
 # Define some user specificities
 sudo usermod -aG docker $USER
 sudo chsh -s /bin/zsh $USER
