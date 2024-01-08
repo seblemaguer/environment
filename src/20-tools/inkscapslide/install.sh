@@ -35,15 +35,10 @@ PREFIX=$1
 if [ "$SERVER_MODE_ON" != true ]
 then
 
-    # Activate conda (FIXME: should not be needed)
-    source $HOME/environment/local/miniconda3/etc/profile.d/conda.sh
-
     (
-        eval "$(conda shell.bash hook)"
-        conda activate tools
         git clone git@github.com:seblemaguer/inkscapeslide.git
         cd inkscapeslide
         pip install -e .
-        rm -rfv inkscapeslide
+        # rm -rfv inkscapeslide
     )
 fi
