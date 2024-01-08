@@ -1,4 +1,3 @@
-brave-browser
 calibre
 ghostscript
 latex2html

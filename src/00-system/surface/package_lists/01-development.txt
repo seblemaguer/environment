@@ -6,9 +6,11 @@ clang
 clang-tools-extra
 cmake
 containerd.io
+docker-buildx-plugin
 docker-ce
 docker-ce-cli
 docker-compose
+docker-compose-plugin
 fish
 git-delta
 gperf

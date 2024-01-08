@@ -31,6 +31,7 @@ PREFIX=$1
 
 sudo dnf -y upgrade
 sudo dnf -y update
+sudo dnf -y install dnf-plugins-core
 
 # Install surface part
 sudo dnf -y config-manager \
@@ -45,12 +46,11 @@ sudo cp $PWD/attachments/default-kernel.service /etc/systemd/system/default-kern
 sudo systemctl enable default-kernel.path
 sudo grubby --set-default /boot/vmlinuz*surface*
 
-# Add brave repository
-sudo dnf -y config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-
 # Add font repository
 sudo dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+# Add docker repository
+sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 
 # Install the packages
 for l in `ls -1 package_lists/*`

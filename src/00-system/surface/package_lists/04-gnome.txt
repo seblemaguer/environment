@@ -1,7 +1,6 @@
 NetworkManager-openvpn
 NetworkManager-openvpn-gnome
-brave-browser
-google-chrome-stable
+firefox
 keepassxc
 kitty
 pavucontrol
