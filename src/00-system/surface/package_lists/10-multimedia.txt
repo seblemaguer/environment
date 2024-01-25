@@ -6,9 +6,9 @@ gimp
 inkscape (SLM: simple vectorize picture design tool)
 mpv
 musescore
+openh264
 pdftk
+pulseaudio-utils
 recode
 shntool
 yt-dlp
-openh264
-vlc
