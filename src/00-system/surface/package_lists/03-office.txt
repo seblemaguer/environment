@@ -3,6 +3,6 @@ ghostscript
 latex2html
 ledger
 libreoffice
-texlive-scheme-full
+texlive-full
 xournalpp
 okular

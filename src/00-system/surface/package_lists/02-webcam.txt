@@ -1,6 +1,6 @@
-libcamera
-libcamera-gstreamer
-libcamera-qcam
-libcamera-tools
-v4l2loopback-kmod
-libcamera-ipa
+# libcamera
+# libcamera-gstreamer
+# libcamera-qcam
+# libcamera-tools
+# v4l2loopback-kmod
+# libcamera-ipa

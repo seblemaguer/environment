@@ -29,45 +29,28 @@ fi
 
 PREFIX=$1
 
-sudo dnf -y upgrade
-sudo dnf -y update
-sudo dnf -y install dnf-plugins-core
+# sudo apt-get -y upgrade
+# sudo apt-get -y update
 
 # Install surface part
-sudo dnf -y config-manager \
-     --add-repo=https://pkg.surfacelinux.com/fedora/linux-surface.repo
-sudo dnf -y install --allowerasing kernel-surface kernel-surface-devel iptsd libwacom-surface
+wget -qO - https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc \
+    | gpg --dearmor | sudo dd of=/etc/apt/trusted.gpg.d/linux-surface.gpg
+echo "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main" \
+	| sudo tee /etc/apt/sources.list.d/linux-surface.list
+sudo apt-get install -y  linux-image-surface linux-headers-surface libwacom-surface iptsd
 sudo systemctl enable iptsd
-sudo dnf -y install surface-secureboot
-
-# Ensure the proper kernel is installed
-sudo cp $PWD/attachments/default-kernel.path /etc/systemd/system/default-kernel.path
-sudo cp $PWD/attachments/default-kernel.service /etc/systemd/system/default-kernel.service
-sudo systemctl enable default-kernel.path
-sudo grubby --set-default /boot/vmlinuz*surface*
-
-# Add font repository
-sudo dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-
-# Add docker repository
-sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+sudo apt-get install -y linux-surface-secureboot-mok
+sudo update-grub
 
 # Install the packages
 for l in `ls -1 package_lists/*`
 do
     printf "########################### %-60s ##########################\n" $l
     (
-        sudo dnf -y install --skip-broken $(grep -v "^#" $l | sed 's/[ ]*(.*//g' | tr '\n' ' ') # TODO: delete empty lines
+        sudo apt-get -y install $(grep -v "^#" $l | sed 's/[ ]*(.*//g' | tr '\n' ' ') # TODO: delete empty lines
     )
 done
-
-# Deal with multimedia bits (FIXME: see how to make this a bit more integrated)
-sudo dnf install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-plugin-libav --exclude=gstreamer1-plugins-bad-free-devel
-sudo dnf install lame\* --exclude=lame-devel
-sudo dnf group upgrade --with-optional Multimedia --allowerasing
-sudo dnf remove totem
 
 # Define some user specificities
 sudo usermod -aG docker $USER
 sudo chsh -s /bin/zsh $USER
-gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"

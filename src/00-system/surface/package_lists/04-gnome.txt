@@ -1,5 +1,3 @@
-NetworkManager-openvpn
-NetworkManager-openvpn-gnome
 firefox
 keepassxc
 kitty

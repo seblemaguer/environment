@@ -1,12 +1,10 @@
-ImageMagick
+imagemagick
 abcde
 cuetools
-ffmpeg-free
+ffmpeg
 gimp
 inkscape (SLM: simple vectorize picture design tool)
 mpv
-musescore
-openh264
 pdftk
 pulseaudio-utils
 recode
