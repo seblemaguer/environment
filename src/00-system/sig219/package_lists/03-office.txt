@@ -1,7 +1,0 @@
-calibre
-ghostscript
-latex2html
-ledger
-libreoffice
-texlive-scheme-medium
-xournalpp
