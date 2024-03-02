@@ -1,7 +1,6 @@
 #!/bin/zsh
 
 # Dealing with options
-NB_PROC=1
 while getopts ":j:hs" opt; do
     case $opt in
         j)
@@ -29,23 +28,12 @@ then
 fi
 
 PREFIX=$1
-OPT_SERVER=""
 
-if [ "$SERVER_MODE_ON" = true ]
-then
-  OPT_SERVER="-s"
-fi
-
-if [ "$SERVER_MODE_ON" != true ]
-then
-    case `hostname` in
-        surface)
-            (cd $PWD/surface; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
-            ;;
-
-    	# NOTE: for now, the work is assumed to be the most restrictive, so let's roll with it by default
-        *)
-            (cd $PWD/work; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
-            ;;
-    esac
-fi
+# Install the packages
+for l in `ls -1 package_lists/*`
+do
+    printf "########################### %-60s ##########################\n" $l
+    (
+        sudo apt-get -y install $(grep -v "^#" $l | sed 's/[ ]*(.*//g' | tr '\n' ' ') # TODO: delete empty lines
+    )
+done

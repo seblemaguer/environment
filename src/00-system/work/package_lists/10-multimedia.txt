@@ -1,0 +1,11 @@
+imagemagick
+abcde
+cuetools
+ffmpeg
+gimp
+inkscape (SLM: simple vectorize picture design tool)
+mpv
+pulseaudio-utils
+qpdf
+recode
+shntool

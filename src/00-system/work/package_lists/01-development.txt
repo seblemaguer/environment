@@ -1,0 +1,16 @@
+autoconf
+automake
+btop
+byobu
+clang
+clang-tools
+cmake
+fish
+git-delta
+gperf
+graphviz
+htop
+libtool
+npm
+sox
+vim

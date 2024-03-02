@@ -1,0 +1,8 @@
+calibre
+ghostscript
+latex2html
+ledger
+libreoffice
+texlive-full
+xournalpp
+okular
