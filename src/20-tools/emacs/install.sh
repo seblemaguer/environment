@@ -38,14 +38,15 @@ git clone --branch emacs-29 --depth 1 https://github.com/emacs-mirror/emacs.git
 cd emacs
 
 # Configure
-./autogen.sh
-
+export CC="gcc-12"
+CC="gcc-12" ./autogen.sh
 if [ "$SERVER_MODE_ON" != true ]
 then
-    ./configure --with-pgtk                  --with-json --with-modules --with-x-toolkit=gtk3 --with-xwidgets --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs
+    ./configure                              --with-json --with-modules --with-x-toolkit=gtk3 --with-xwidgets --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs --mandir=$PREFIX/share/man --infodir=$PREFIX/share/info
 else
-    ./configure ---without-xpm --without-gif --with-json --with-modules                                       --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs
+    ./configure ---without-xpm --without-gif --with-json --with-modules                                       --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs --mandir=$PREFIX/share/man --infodir=$PREFIX/share/info
 fi
+
 # Compile
 make -j $NB_PROC
 
@@ -55,7 +56,6 @@ make install
 # Clean
 cd ../
 rm -rf emacs
-
 
 #############################################
 # Install tree-sitter helpers
