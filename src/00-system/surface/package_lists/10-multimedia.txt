@@ -3,10 +3,10 @@ abcde
 cuetools
 ffmpeg
 gimp
-inkscape (SLM: simple vectorize picture design tool)
+inkscape
 mpv
-pdftk
 pulseaudio-utils
+qpdf
 recode
 shntool
 yt-dlp

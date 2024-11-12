@@ -1,7 +1,7 @@
 aria2
 fonts-roboto
 fonts-symbola
-gnutls-dev
+libgnutls28-dev
 isync
 libgccjit-13-dev
 libgif-dev
@@ -11,14 +11,14 @@ libjpeg-dev
 libpoppler-dev
 libpoppler-glib-dev
 librsvg2-dev
+libsqlite3-dev
 libtiff-dev
 libtree-sitter-dev
-libwebkit2gtk-4.0-dev
 libxapian-dev
 libxpm-dev
 meson
 mkcue
-ncurses-dev
+libncurses-dev
 ninja-build
 pandoc
 php

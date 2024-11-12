@@ -39,7 +39,7 @@ fi
 if [ "$SERVER_MODE_ON" != true ]
 then
     case `hostname` in
-        surface)
+        surface.home)
             (cd $PWD/surface; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
             ;;
 
