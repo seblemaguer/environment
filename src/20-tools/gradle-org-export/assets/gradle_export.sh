@@ -46,11 +46,11 @@ fi
 EXPORT_TASK=$1
 
 # Control number of workers
-PARALLEL_OPT="--max-workers 1"
+PARALLEL_OPT=(--max-workers 1)
 if [[ $NB_PROC -eq 0 ]]; then
     PARALLEL_OPT=""
 elif [[ $NB_PROC -gt 1 ]]; then
-    PARALLEL_OPT="--max-workers $NB_PROC"
+    PARALLEL_OPT=(--max-workers $NB_PROC)
 fi
 
 # Define verbosity and debugging options
