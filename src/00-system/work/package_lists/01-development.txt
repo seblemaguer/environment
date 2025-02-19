@@ -12,6 +12,5 @@ graphviz
 htop
 libtool
 libtool-bin
-npm
 sox
 vim
