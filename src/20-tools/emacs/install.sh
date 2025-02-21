@@ -38,13 +38,12 @@ git clone --branch emacs-30.0.93 --depth 1 https://github.com/emacs-mirror/emacs
 cd emacs
 
 # Configure
-export CC="gcc-12"
-CC="gcc-12" ./autogen.sh
+./autogen.sh
 if [ "$SERVER_MODE_ON" != true ]
 then
-    ./configure                              --with-modules --with-x-toolkit=gtk3 --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs --mandir=$PREFIX/share/man --infodir=$PREFIX/share/info
+    ./configure                              --with-modules --with-x-toolkit=gtk3 --with-pgtk --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs --mandir=$PREFIX/share/man --infodir=$PREFIX/share/info
 else
-    ./configure ---without-xpm --without-gif --with-json --with-modules                                     --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs --mandir=$PREFIX/share/man --infodir=$PREFIX/share/info
+    ./configure ---without-xpm --without-gif --with-modules                                   --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs --mandir=$PREFIX/share/man --infodir=$PREFIX/share/info
 fi
 
 # Compile
