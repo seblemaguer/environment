@@ -32,21 +32,25 @@ then
 fi
 PREFIX=$1
 
-
 # Install mamba
 echo "==== Get Microamba"
-BIN_FOLDER=$PREFIX/bin INIT_YES=yes CONDA_FORGE_YES=yes PREFIX_LOCATION=$PREFIX/micromamba  "${SHELL}" <(curl -L micro.mamba.pm/install.sh) <&-
-
-exit 0
+BIN_FOLDER=$PREFIX/bin INIT_YES=yes CONDA_FORGE_YES=yes PREFIX_LOCATION=$PREFIX/micromamba \
+                       "${SHELL}" <(curl -L micro.mamba.pm/install.sh) <&-
 alias conda=micromamba
 
-# Install baseline packages
-echo "=== Install ipython & black in the base environment"
-conda install -y ipython black pandas -n base -c conda-forge
+# Install baseline environment
+conda create -r $HOME/environment/local/micromamba/ -n local_environment python=3.10
+if [ "$SERVER_MODE_ON" != true ]
+then
+    case `hostname` in
+        surface.home)
+            conda in
+            (cd $PWD/surface; zsh install.sh $OPT_SERVER -j $NB_PROC $PREFIX)
+            ;;
 
-# Installing the different environment
-for env in `ls -d environments/*`
-do
-    echo "==== Creating conda environment from $PWD/$env"
-    conda env create -q -f $env
-done
+    	# NOTE: for now, the work is assumed to be the most restrictive, so let's roll with it by default
+        *)
+            conda run -r $HOME/environment/local/micromamba/ -n local_environment pip install emailproxy[gui]
+            ;;
+    esac
+fi

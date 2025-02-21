@@ -34,11 +34,9 @@ PREFIX=$1
 
 if [ "$SERVER_MODE_ON" != true ]
 then
-
     (
         git clone git@github.com:seblemaguer/inkscapeslide.git
         cd inkscapeslide
-        pip install -e .
-        # rm -rfv inkscapeslide
+        micromamba run -n local_environment pip install -e .
     )
 fi
