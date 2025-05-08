@@ -34,16 +34,16 @@ PREFIX=$1
 
 # Reset the source the source
 rm -rfv emacs
-git clone --branch emacs-30.0.93 --depth 1 https://github.com/emacs-mirror/emacs.git
+git clone --branch emacs-30.1 --depth 1 https://github.com/emacs-mirror/emacs.git
 cd emacs
 
 # Configure
 ./autogen.sh
 if [ "$SERVER_MODE_ON" != true ]
 then
-    ./configure                              --with-modules --with-x-toolkit=gtk3 --with-pgtk --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs --mandir=$PREFIX/share/man --infodir=$PREFIX/share/info
+    ./configure                              --with-modules --with-x-toolkit=no --with-pgtk --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs --mandir=$PREFIX/share/man --infodir=$PREFIX/share/info
 else
-    ./configure ---without-xpm --without-gif --with-modules                                   --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs --mandir=$PREFIX/share/man --infodir=$PREFIX/share/info
+    ./configure ---without-xpm --without-gif --with-modules                                 --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs --mandir=$PREFIX/share/man --infodir=$PREFIX/share/info
 fi
 
 # Compile
@@ -64,7 +64,7 @@ then
     git clone https://github.com/casouri/tree-sitter-module.git
     cd tree-sitter-module
     JOBS=$NB_PROC ./batch.sh
-    mkdir ~/.emacs.d/tree-sitter
+    mkdir -p ~/.emacs.d/tree-sitter
     cp -rfv dist/* ~/.emacs.d/tree-sitter
     cd ..
     rm -rf tree-sitter-module

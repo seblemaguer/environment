@@ -36,6 +36,10 @@ PREFIX=$1
 # Installing different part
 for src_dir in `ls -d * | grep -v install.sh`
 do
+    if [ ! -e "$src_dir/install.sh" ]; then
+        continue
+    fi
+
     echo "=============================================================================="
     echo "### Installating from $src_dir"
     echo "=============================================================================="
