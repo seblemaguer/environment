@@ -34,10 +34,11 @@ PREFIX=$1
 
 # Reset the source the source
 rm -rfv emacs
-git clone --branch emacs-30.1 --depth 1 https://github.com/emacs-mirror/emacs.git
+git clone --branch emacs-30.2 --depth 1 https://github.com/emacs-mirror/emacs.git
 cd emacs
 
 # Configure
+export CC="gcc-12"
 ./autogen.sh
 if [ "$SERVER_MODE_ON" != true ]
 then
@@ -55,20 +56,6 @@ make install
 # Clean
 cd ../
 rm -rf emacs
-
-#############################################
-# Install tree-sitter helpers
-##############################################
-if [ "$SERVER_MODE_ON" != true ]
-then
-    git clone https://github.com/casouri/tree-sitter-module.git
-    cd tree-sitter-module
-    JOBS=$NB_PROC ./batch.sh
-    mkdir -p ~/.emacs.d/tree-sitter
-    cp -rfv dist/* ~/.emacs.d/tree-sitter
-    cd ..
-    rm -rf tree-sitter-module
-fi
 
 #############################################
 # Install tdlib (needed for telega)
