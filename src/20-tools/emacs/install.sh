@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-# Set environment path to the current directory
 NB_PROC=1
+EMACS_VERSION=30.2
 
 # Dealing with options
 while getopts ":j:hs" opt; do
@@ -34,15 +34,19 @@ PREFIX=$1
 
 # Reset the source the source
 rm -rfv emacs
-git clone --branch emacs-30.2 --depth 1 https://github.com/emacs-mirror/emacs.git
+git clone --branch emacs-${EMACS_VERSION} --depth 1 https://github.com/emacs-mirror/emacs.git
 cd emacs
 
 # Configure
-export CC="gcc-12"
+export CC="gcc-14"
 ./autogen.sh
 if [ "$SERVER_MODE_ON" != true ]
 then
-    ./configure                              --with-modules --with-x-toolkit=no --with-pgtk --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs --mandir=$PREFIX/share/man --infodir=$PREFIX/share/info
+    ./configure \
+        CFLAGS="-march=native -Ofast -fno-finite-math-only -pipe -fgraphite-identity -floop-nest-optimize -fdevirtualize-at-ltrans -fipa-pta -fno-semantic-interposition" \
+        --with-modules --with-x-toolkit=no --with-pgtk \
+        --with-native-compilation=aot --with-tree-sitter \
+        --prefix=$PREFIX/apps/emacs --mandir=$PREFIX/share/man --infodir=$PREFIX/share/info
 else
     ./configure ---without-xpm --without-gif --with-modules                                 --with-native-compilation --with-tree-sitter --prefix=$PREFIX/apps/emacs --mandir=$PREFIX/share/man --infodir=$PREFIX/share/info
 fi
