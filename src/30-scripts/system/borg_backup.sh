@@ -1,14 +1,16 @@
 #!/bin/zsh
 
-HELP="$0 [-r] <remote ID>"
-ROOT_DIR=/media/lemaguer/LEMAGUES_WORK/backups/
+HELP="$0 [-R root_backup_dir] [-r] <remote ID>"
+ROOT_DIR="/media/lemaguer/LEMAGUES_WORK/backups/"
 
 # Dealing with options
-while getopts ":hr" opt; do
+while getopts ":hrR:" opt; do
     case $opt in
         r)
             IS_REMOTE=true
-            echo "parallel mode activated with $NB_PROC process" >&2
+            ;;
+        R)
+            ROOT_DIR=${OPTARG}
             ;;
         h)
             echo $HELP
