@@ -34,8 +34,9 @@ PREFIX=$1
 
 # Reset the source the source
 rm -rfv emacs
-git clone --branch emacs-${EMACS_VERSION} --depth 1 https://github.com/emacs-mirror/emacs.git
+git clone  https://github.com/emacs-mirror/emacs.git
 cd emacs
+git checkout b935915 # NOTE: emacs 31.0.50 before official release
 
 # Configure
 export CC="gcc-14"
