@@ -1,6 +1,7 @@
 aria2
 fonts-roboto
 fonts-symbola
+imapfilter
 isync
 libgccjit-12-dev
 libgif-dev
