@@ -106,4 +106,12 @@ then
         cp server/build/install/server/lib/* $PREFIX/lib
     )
     rm -rfv kotlin-language-server
+
+    # Harper for spell/grammar checking
+    (
+        wget https://github.com/Automattic/harper/releases/download/v2.0.0/harper-ls-x86_64-unknown-linux-musl.tar.gz
+        tar xzvf harper-ls-x86_64-unknown-linux-musl.tar.gz
+        mv harper-ls $PREFIX/bin
+        rm -rfv harper-ls-x86_64-unknown-linux-musl.tar.gz
+    )
 fi
